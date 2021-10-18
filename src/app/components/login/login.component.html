@@ -1,0 +1,39 @@
+<div class="row mt-5" style="width: 100%;
+        height: 100%;">
+    <div class="col-lg-7 col-md-7 col-10 mx-auto" style="display: flex;
+            align-items: center;">
+        <div class="modal-body px-md-5 px-4">
+            <h3 class="modal-title mt-4 mb-0 text-white text-center mb-5">Iniciar Sesion</h3>
+            <p class="font-size-sm text-muted text-center">Inicie sesión en su cuenta utilizando el correo electrónico y la contraseña</p>
+
+            <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+                
+                <div class="form-group">
+                    <label for="signin-email" class="text-white">Correo Electronico</label>
+                    <input type="email" class="form-control" name="email" [(ngModel)]="user.email" placeholder="Tu correo electronico"
+                        required="">
+                </div>
+
+                <div class="form-group">
+                    <label for="signin-password" class="form-label text-white">Contraseña</label>
+                    <div class="cs-password-toggle input-group-overlay">
+                        <input type="password" class="form-control appended-form-control" name="password" [(ngModel)]="user.password"
+                            placeholder="Tu contraseña" required="">
+                        <div class="input-group-append-overlay">
+                            <label class="btn cs-password-toggle-btn input-group-text">
+                                <input type="checkbox" class="custom-control-input">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">Iniciar Sesion</button>
+                <!-- <p class="font-size-sm pt-4 mb-0 text-white">
+                    No tienes una cuenta?
+                    <a href="#" class="font-weight-bold text-decoration-none" data-view="#modal-signup-view">Registrate</a>
+                </p> -->
+            </form>
+
+        </div>
+    </div>
+</div>
