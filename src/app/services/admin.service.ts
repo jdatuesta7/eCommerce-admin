@@ -36,10 +36,9 @@ export class AdminService {
       const helper = new JwtHelperService();
       var decodedToken = helper.decodeToken(<any>token);
 
-      console.log(decodedToken);
+      // console.log(decodedToken);
 
       if (!decodedToken) {
-        console.log('NO ES VALIDO');
         localStorage.removeItem('token');
         return false;
       }
