@@ -1,0 +1,80 @@
+<app-sidebar></app-sidebar>
+<!-- Page title-->
+<div class="border-bottom pt-5 mt-2 mb-5">
+    <h1 class="mt-2 mt-md-4 mb-3 pt-5">Registrar Clientes</h1>
+    <div class="d-flex flex-wrap flex-md-nowrap justify-content-between">
+        <p class="text-muted">Este módulo permite crear/registrar clientes</p>
+    </div>
+</div>
+
+<form [formGroup]="clienteForm" (ngSubmit)="onSubmit()">
+    <div class="card box-shadow-sm">
+        <div class="card-header">
+            <h5 style="margin-bottom: 0px;">Registro de cliente</h5>
+        </div>
+        <div class="card-body">
+
+            <div class="row">
+                <div class="col-md-4 form-group">
+                    <label for="nombres" class="form-label">Nombres</label>
+                    <input id="nombres" type="text" formControlName="nombres" class="form-control" placeholder="Nombres"
+                        required>
+                </div>
+                <div class="col-md-4 form-group">
+                    <label for="apellidos" class="form-label">Apellidos</label>
+                    <input id="apellidos" type="text" formControlName="apellidos" class="form-control"
+                        placeholder="Apellidos" required>
+                </div>
+                <div class="col-md-4 form-group">
+                    <label for="email" class="form-label">Correo electrónico</label>
+                    <input id="email" type="email" formControlName="email" class="form-control"
+                        placeholder="Correo electrónico" required>
+                </div>
+
+                <div class="col-md-4 form-group">
+                    <label for="telefono" class="form-label">Telefono</label>
+                    <input id="telefono" type="number" formControlName="telefono" class="form-control"
+                        placeholder="Telefono" required>
+                </div>
+                <div class="col-md-4 form-group">
+                    <label for="fechaNacimiento" class="form-label">Fecha nacimiento</label>
+                    <input id="fechaNacimiento" type="date" formControlName="fechaNacimiento" class="form-control"
+                        required>
+                </div>
+                <div class="col-md-4 form-group">
+                    <label for="DNI" class="form-label">DNI</label>
+                    <input id="DNI" type="number" formControlName="DNI" class="form-control" placeholder="DNI" required>
+                </div>
+
+                <div class="col-md-4">
+                    <label for="genero" class="form-label">Genero</label>
+                    <select required id="genero" formControlName="genero" class="form-control custom-select">
+                        <option value="" selected disabled>Seleccionar...</option>
+                        <option value="Masculino">Masculino</option>
+                        <option value="Femenino">Femenino</option>
+                    </select>
+                </div>
+
+                <div class="col-md-4">
+                    <label for="ciudad" class="form-label">Ciudad</label>
+                    <select required id="ciudad" formControlName="ciudad" class="form-control custom-select">
+                        <option value="" selected disabled>Seleccionar...</option>
+                        <option value="Ciudad 1">Ciudad 1</option>
+                        <option value="Ciudad 2">Ciudad 2</option>
+                        <option value="Ciudad 2">Ciudad 3</option>
+                    </select>
+                </div>
+
+                <div class="col-md-4 form-group">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input id="password" type="text" formControlName="password" class="form-control"
+                        placeholder="Contraseña" required>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer mt-3">
+            <button type="submit" [disabled]="!clienteForm.valid" class="btn btn-primary mr-3">Crear cliente</button>
+            <a [routerLink]="['/panel/clientes']" class="btn btn-warning">Regresar</a>
+        </div>
+    </div>
+</form>

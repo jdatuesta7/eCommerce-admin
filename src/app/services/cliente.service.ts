@@ -18,4 +18,9 @@ export class ClienteService {
     let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
     return this._http.get(this.url+'listar_clientes_filtro_admin/'+tipo+'/'+filtro, {headers: headers});
   }
+
+  registro_cliente_admin(data:any ,token:any):Observable<any>{
+    let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
+    return this._http.post(this.url+'/registro_cliente_admin', data, {headers: headers});
+  }
 }

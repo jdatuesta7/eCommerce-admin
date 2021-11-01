@@ -14,7 +14,7 @@ export class IndexClientesComponent implements OnInit {
   public filtro_apellidos = '';
   public filtro_correo = '';
   public page = 1;
-  public pageSize = 1;
+  public pageSize = 20;
   public token;
 
 
