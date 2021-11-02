@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AdminService } from 'src/app/services/admin.service';
 import { ClienteService } from 'src/app/services/cliente.service';
+
+declare var jQuery:any;
+declare var $:any;
+declare var iziToast:any;
 
 @Component({
   selector: 'app-index-clientes',
@@ -20,7 +25,8 @@ export class IndexClientesComponent implements OnInit {
 
   constructor(
     private _clienteService : ClienteService,
-    private _adminService : AdminService
+    private _adminService : AdminService,
+    private _router : Router
   ) { 
     this.token = this._adminService.getToken();
   }
@@ -49,6 +55,34 @@ export class IndexClientesComponent implements OnInit {
     }else{
       this.getClientes(null, null);
     }
+  }
+
+  eliminar(id: any){
+
+    this._clienteService.eliminar_cliente_admin(id, this.token).subscribe(
+      response => {
+        iziToast.show({
+          title: 'OK',
+          color: 'green',
+          position: 'topRight',
+          message: 'se ha eliminado correctamente el cliente'
+        });
+
+        $('#delete-'+id).modal('hide');
+        $('.modal-backdrop').removeClass('show');
+
+        this.getClientes(null, null);
+        
+      },error => {
+        iziToast.show({
+          title: 'OK',
+          color: 'green',
+          position: 'topRight',
+          message: 'ha ocurrido un error en el servidor'
+        });
+      }
+    );
+
   }
 
 }

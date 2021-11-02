@@ -76,37 +76,47 @@ export class EditClienteComponent implements OnInit {
 
   onSubmit(form: any) {
     console.log(this.cliente);
+    if(form.valid){
+    
+      this._clienteService.actualizar_cliente_admin(this.id, form.value, this.token).subscribe(
+        response => {
+          if(response.data){
+            console.log(response);
+            iziToast.show({
+              title: 'OK',
+              color: 'green',
+              position: 'topRight',
+              message: 'se ha actualizado correctamente el cliente'
+            });
 
-    this._clienteService.actualizar_cliente_admin(this.id, form, this.token).subscribe(
-      response => {
-        if(response.data){
-          console.log(response);
-          iziToast.show({
-            title: 'OK',
-            color: 'green',
-            position: 'topRight',
-            message: 'se ha actualizado correctamente el cliente'
-          });
+            this._router.navigate(['/panel/clientes']);
+          }else{
+            iziToast.show({
+              title: 'ERROR',
+              color: 'red',
+              position: 'topRight',
+              message: response.message
+            });
+          }
+        },error => {
+          console.log(error);
 
-          this._router.navigate(['/panel/clientes']);
-        }else{
           iziToast.show({
             title: 'ERROR',
             color: 'red',
             position: 'topRight',
-            message: response.message
+            message: 'Hubo un error en el servidor'
           });
         }
-      },error => {
-        console.log(error);
+      );
 
-        iziToast.show({
-          title: 'ERROR',
-          color: 'red',
-          position: 'topRight',
-          message: 'Hubo un error en el servidor'
-        });
-      }
-    );
+    }else{
+      iziToast.show({
+        title: 'ERROR',
+        color: 'red',
+        position: 'topRight',
+        message: 'Porfavor complete todos los campos correctamente'
+      });
+    }
   }
 }

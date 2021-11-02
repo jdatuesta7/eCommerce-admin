@@ -46,14 +46,32 @@
                             <td>{{ item.apellidos }}</td>
                             <td>{{ item.email}} </td>
                             <td>
-                                <div class="btn-group dropdown">
+                                <div class="btn-group dropdown d-inline-block mb-3 mr-2">
                                     <button type="button" class="btn btn-outline-secondary btn-sm dropdown-toggle"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Opciones
                                     </button>
                                     <div class="dropdown-menu">
                                         <a [routerLink]="['/panel/clientes/editar/', item._id]" class="dropdown-item">Editar</a>
-                                        <a href="#" class="dropdown-item">Eliminar</a>
+                                        <a type="button" style="cursor: pointer;" data-toggle="modal"  [attr.data-target]="'#delete-'+item._id" class="dropdown-item">Eliminar</a>
+                                    </div>
+                                </div>
+
+                                <div class="modal fade" id="delete-{{item._id}}" tabindex="-1" style="display: none;" aria-hidden="true" >
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h4 class="modal-title">Eliminar, {{item.nombres + ' ' +item.apellidos}} </h4>
+                                          <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span area-hidden="true">x</span></button>
+                                        </div>
+                                        <div class="modal-body">
+                                          <p class="fs-sm">¿ Desea eliminar este cliente ?</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                          <button class="btn btn-secondary btn-sm" type="button" data-dismiss="modal">Cancelar</button>
+                                          <button class="btn btn-primary btn-sm" (click)="eliminar(item._id)" type="button">Confirmar</button>
+                                        </div>
+                                      </div>
                                     </div>
                                 </div>
                             </td>
