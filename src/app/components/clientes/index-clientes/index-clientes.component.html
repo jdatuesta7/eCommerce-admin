@@ -52,7 +52,7 @@
                                         Opciones
                                     </button>
                                     <div class="dropdown-menu">
-                                        <a href="#" class="dropdown-item">Editar</a>
+                                        <a [routerLink]="['/panel/clientes/editar/', item._id]" class="dropdown-item">Editar</a>
                                         <a href="#" class="dropdown-item">Eliminar</a>
                                     </div>
                                 </div>

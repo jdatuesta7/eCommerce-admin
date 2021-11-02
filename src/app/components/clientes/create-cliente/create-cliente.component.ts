@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from "@angular/forms";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from '@angular/router';
 import { AdminService } from 'src/app/services/admin.service';
 import { ClienteService } from 'src/app/services/cliente.service';
@@ -13,30 +13,19 @@ declare var iziToast:any;
 })
 export class CreateClienteComponent implements OnInit {
 
-  public cliente : any = {
-    nombres : '',
-    apellidos : '',
-    ciudad : '',
-    email : '',
-    password : '',
-    telefono : '',
-    fechaNacimiento : '',
-    DNI : '',
-    genero : ''
-  };
-
+  public cliente : any = {};
   public token : any;
 
   clienteForm = new FormGroup({
-    nombres : new FormControl(''),
-    apellidos : new FormControl(''),
-    ciudad : new FormControl(''),
-    email : new FormControl(''),
-    password : new FormControl(''),
-    telefono : new FormControl(''),
-    fechaNacimiento : new FormControl(''),
-    DNI : new FormControl(''),
-    genero : new FormControl(''),
+    nombres : new FormControl('', Validators.required),
+    apellidos : new FormControl('', Validators.required),
+    ciudad : new FormControl('', Validators.required),
+    email : new FormControl('', Validators.required),
+    password : new FormControl('', Validators.required),
+    telefono : new FormControl('', Validators.required),
+    f_nacimiento : new FormControl('', Validators.required),
+    dni : new FormControl('', Validators.required),
+    genero : new FormControl('', Validators.required),
   });
 
   constructor(
@@ -50,17 +39,9 @@ export class CreateClienteComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSubmit(){
+  onSubmit(form : any){
 
-    this.cliente.nombres = this.clienteForm.controls.nombres.value;
-    this.cliente.apellidos = this.clienteForm.controls.apellidos.value;
-    this.cliente.ciudad = this.clienteForm.controls.ciudad.value;
-    this.cliente.email = this.clienteForm.controls.email.value;
-    this.cliente.password = this.clienteForm.controls.password.value;
-    this.cliente.fechaNacimiento = this.clienteForm.controls.fechaNacimiento.value;
-    this.cliente.DNI = this.clienteForm.controls.DNI.value;
-    this.cliente.genero = this.clienteForm.controls.genero.value;
-    this.cliente.telefono = this.clienteForm.controls.telefono.value;
+    this.cliente = form;
 
     this._clienteService.registro_cliente_admin(this.cliente, this.token).subscribe(
       response => {

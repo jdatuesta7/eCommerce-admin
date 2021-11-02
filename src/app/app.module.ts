@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from "@angular/forms";
-import { ReactiveFormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClient, HttpClientModule } from "@angular/common/http";
 import { NgbPaginationModule } from "@ng-bootstrap/ng-bootstrap";
 
@@ -15,6 +14,7 @@ import { IndexClientesComponent } from './components/clientes/index-clientes/ind
 import { CreateClienteComponent } from './components/clientes/create-cliente/create-cliente.component';
 import { IndexVendedoresComponent } from './components/vendedores/index-vendedores/index-vendedores.component';
 import { CreateVendedorComponent } from './components/vendedores/create-vendedor/create-vendedor.component';
+import { EditClienteComponent } from './components/edit-cliente/edit-cliente.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +25,8 @@ import { CreateVendedorComponent } from './components/vendedores/create-vendedor
     IndexClientesComponent,
     CreateClienteComponent,
     IndexVendedoresComponent,
-    CreateVendedorComponent
+    CreateVendedorComponent,
+    EditClienteComponent
   ],
   imports: [
     BrowserModule,

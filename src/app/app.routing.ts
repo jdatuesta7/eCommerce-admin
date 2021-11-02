@@ -8,6 +8,7 @@ import { IndexClientesComponent } from "./components/clientes/index-clientes/ind
 import { CreateClienteComponent } from "./components/clientes/create-cliente/create-cliente.component";
 import { IndexVendedoresComponent } from "./components/vendedores/index-vendedores/index-vendedores.component";
 import { CreateVendedorComponent } from "./components/vendedores/create-vendedor/create-vendedor.component";
+import { EditClienteComponent } from "./components/edit-cliente/edit-cliente.component";
 
 const appRoute: Routes = [
     {path: '', component: LoginComponent},
@@ -17,6 +18,7 @@ const appRoute: Routes = [
     {path: 'panel', children: [
         {path: 'clientes', component: IndexClientesComponent, canActivate: [AdminGuard]},
         {path: 'clientes/registro', component: CreateClienteComponent, canActivate: [AdminGuard]},
+        {path: 'clientes/editar/:id', component: EditClienteComponent, canActivate: [AdminGuard]},
 
         {path: 'vendedores', component: IndexVendedoresComponent, canActivate: [AdminGuard]},
         {path: 'vendedores/registro', component: CreateVendedorComponent, canActivate: [AdminGuard]}
