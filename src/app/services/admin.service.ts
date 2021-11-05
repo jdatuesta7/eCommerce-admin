@@ -71,4 +71,9 @@ export class AdminService {
     let headers = new HttpHeaders({'Content-Type':'application/json', 'Authorization': token});
     return this._http.put(this.url+'/actualizar_vendedor_admin/'+id, data, {headers: headers});
   }
+
+  eliminar_vendedor_admin(id:any, token:any):Observable<any>{
+    let headers = new HttpHeaders({'Content-Type':'application/json', 'Authorization': token});
+    return this._http.delete(this.url+'/eliminar_vendedor_admin/'+id, {headers: headers});
+  }
 }
