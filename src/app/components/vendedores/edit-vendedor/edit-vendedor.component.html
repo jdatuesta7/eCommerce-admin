@@ -1,18 +1,20 @@
 <app-sidebar></app-sidebar>
 <!-- Page title-->
 <div class="border-bottom pt-5 mt-2 mb-5">
-    <h1 class="mt-2 mt-md-4 mb-3 pt-5">Registrar Vendedores</h1>
+    <h1 class="mt-2 mt-md-4 mb-3 pt-5">Vendedores</h1>
     <div class="d-flex flex-wrap flex-md-nowrap justify-content-between">
-        <p class="text-muted">Este módulo permite crear/registrar vendedores</p>
+        <p class="text-muted">Este módulo permite editar el vendedor</p>
     </div>
 </div>
 
-<form [formGroup]="vendedorForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="vendedorForm" (ngSubmit)="onSubmit(vendedorForm)">
     <div class="card box-shadow-sm">
+
         <div class="card-header">
-            <h5 style="margin-bottom: 0px;">Registro de vendedor</h5>
+            <h5 style="margin-bottom: 0px;">Actualizar vendedor</h5>
         </div>
-        <div class="card-body">
+
+        <div class="card-body"  *ngIf="vendedor != undefined">
 
             <div class="row">
                 <div class="col-md-4 form-group">
@@ -20,13 +22,11 @@
                     <input id="nombres" type="text" formControlName="nombres" class="form-control" placeholder="Nombres"
                         required>
                 </div>
-
                 <div class="col-md-4 form-group">
                     <label for="apellidos" class="form-label">Apellidos</label>
                     <input id="apellidos" type="text" formControlName="apellidos" class="form-control"
                         placeholder="Apellidos" required>
                 </div>
-
                 <div class="col-md-4 form-group">
                     <label for="email" class="form-label">Correo electrónico</label>
                     <input id="email" type="email" formControlName="email" class="form-control"
@@ -35,7 +35,7 @@
 
                 <div class="col-md-4 form-group">
                     <label for="DNI" class="form-label">DNI</label>
-                    <input id="DNI" type="number" formControlName="DNI" class="form-control" placeholder="DNI" required>
+                    <input id="DNI" type="number" formControlName="dni" class="form-control" placeholder="DNI" required>
                 </div>
 
                 <div class="col-md-4 form-group">
@@ -52,24 +52,24 @@
 
                 <div class="col-md-4 form-group">
                     <label for="telefono" class="form-label">Telefono</label>
-                    <input id="telefono" type="tel" formControlName="telefono" class="form-control"
+                    <input id="telefono" type="number" formControlName="telefono" class="form-control"
                         placeholder="Telefono" required>
                 </div>
-
-                <div class="col-md-4 form-group">
-                    <label for="password" class="form-label">Contraseña</label>
-                    <input id="password" formControlName="password" class="form-control"
-                        placeholder="contraseña" required>
-                </div>
-
+               
                 <div class="col-md-8 form-group">
                     <label for="description" class="form-label">Descripcion del Negocio</label>
                     <textarea id="description" formControlName="descripcion" class="form-control" cols="30" rows="1" placeholder="Descripcion..." required></textarea>
                 </div>
             </div>
+            
         </div>
+
+        <div class="card-body" *ngIf="vendedor == undefined">
+            <h3 class="text-center">No se encontró el registro <img src="assets/img/error/advertencia.png" width="70px" alt="error"> </h3>
+        </div>
+
         <div class="card-footer mt-3">
-            <button type="submit" [disabled]="!vendedorForm.valid" class="btn btn-primary mr-3">Crear vendedor</button>
+            <button type="submit" class="btn btn-primary mr-3">Actualizar cliente</button>
             <a [routerLink]="['/panel/vendedores']" class="btn btn-warning">Regresar</a>
         </div>
     </div>

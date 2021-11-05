@@ -57,8 +57,18 @@ export class AdminService {
     return this._http.get(this.url+'listar_vendedores_filtro_admin/'+tipo+'/'+filtro, {headers: headers});
   }
 
-  registro_vendedores_admin(data:any ,token:any):Observable<any>{
+  registro_vendedores_admin(data:any, token:any):Observable<any>{
     let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
     return this._http.post(this.url+'/registro_vendedor_admin', data, {headers: headers});
+  }
+
+  obtener_vendedor_admin(id:any, token:any):Observable<any>{
+    let headers = new HttpHeaders({'Content-Type':'application/json', 'Authorization': token});
+    return this._http.get(this.url+'/obtener_vendedor_admin/'+id, {headers: headers});
+  }
+
+  actualizar_vendedor_admin(id:any, token:any, data:any):Observable<any>{
+    let headers = new HttpHeaders({'Content-Type':'application/json', 'Authorization': token});
+    return this._http.put(this.url+'/actualizar_vendedor_admin/'+id, data, {headers: headers});
   }
 }
