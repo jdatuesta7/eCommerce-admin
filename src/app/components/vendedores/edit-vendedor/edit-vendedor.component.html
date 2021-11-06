@@ -14,62 +14,78 @@
             <h5 style="margin-bottom: 0px;">Actualizar vendedor</h5>
         </div>
 
-        <div class="card-body"  *ngIf="vendedor != undefined">
-
-            <div class="row">
-                <div class="col-md-4 form-group">
-                    <label for="nombres" class="form-label">Nombres</label>
-                    <input id="nombres" type="text" formControlName="nombres" class="form-control" placeholder="Nombres"
-                        required>
-                </div>
-                <div class="col-md-4 form-group">
-                    <label for="apellidos" class="form-label">Apellidos</label>
-                    <input id="apellidos" type="text" formControlName="apellidos" class="form-control"
-                        placeholder="Apellidos" required>
-                </div>
-                <div class="col-md-4 form-group">
-                    <label for="email" class="form-label">Correo electrónico</label>
-                    <input id="email" type="email" formControlName="email" class="form-control"
-                        placeholder="Correo electrónico" required>
-                </div>
-
-                <div class="col-md-4 form-group">
-                    <label for="DNI" class="form-label">DNI</label>
-                    <input id="DNI" type="number" formControlName="dni" class="form-control" placeholder="DNI" required>
-                </div>
-
-                <div class="col-md-4 form-group">
-                    <label for="id_local" class="form-label">Numero del Local</label>
-                    <input id="id_local" type="text" formControlName="id_local" class="form-control"
-                        placeholder="Numero del Local" required>
-                </div>
-
-                <div class="col-md-4 form-group">
-                    <label for="nombre_local" class="form-label">Nombre del Local</label>
-                    <input id="nombre_local" style="text-transform:uppercase;" type="text" formControlName="nombre_local" class="form-control"
-                        placeholder="Nombre del Local" required>
-                </div>
-
-                <div class="col-md-4 form-group">
-                    <label for="telefono" class="form-label">Telefono</label>
-                    <input id="telefono" type="number" formControlName="telefono" class="form-control"
-                        placeholder="Telefono" required>
-                </div>
-               
-                <div class="col-md-8 form-group">
-                    <label for="description" class="form-label">Descripcion del Negocio</label>
-                    <textarea id="description" formControlName="descripcion" class="form-control" cols="30" rows="1" placeholder="Descripcion..." required></textarea>
-                </div>
+        <ng-container *ngIf="load_data">
+            <div class="spinner-border mx-auto mb-2 mt-2" style="width: 5rem; height: 5rem;" role="status">
+                <span class="visually-hidden"></span>
             </div>
-            
-        </div>
+        </ng-container>
 
-        <div class="card-body" *ngIf="vendedor == undefined">
-            <h3 class="text-center">No se encontró el registro <img src="assets/img/error/advertencia.png" width="70px" alt="error"> </h3>
-        </div>
+        <ng-container *ngIf="!load_data">
+            <div class="card-body" *ngIf="vendedor != undefined">
+
+                <div class="row">
+                    <div class="col-md-4 form-group">
+                        <label for="nombres" class="form-label">Nombres</label>
+                        <input id="nombres" type="text" formControlName="nombres" class="form-control"
+                            placeholder="Nombres" required>
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label for="apellidos" class="form-label">Apellidos</label>
+                        <input id="apellidos" type="text" formControlName="apellidos" class="form-control"
+                            placeholder="Apellidos" required>
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label for="email" class="form-label">Correo electrónico</label>
+                        <input id="email" type="email" formControlName="email" class="form-control"
+                            placeholder="Correo electrónico" required>
+                    </div>
+
+                    <div class="col-md-4 form-group">
+                        <label for="DNI" class="form-label">DNI</label>
+                        <input id="DNI" type="number" formControlName="dni" class="form-control" placeholder="DNI"
+                            required>
+                    </div>
+
+                    <div class="col-md-4 form-group">
+                        <label for="id_local" class="form-label">Numero del Local</label>
+                        <input id="id_local" type="text" formControlName="id_local" class="form-control"
+                            placeholder="Numero del Local" required>
+                    </div>
+
+                    <div class="col-md-4 form-group">
+                        <label for="nombre_local" class="form-label">Nombre del Local</label>
+                        <input id="nombre_local" style="text-transform:uppercase;" type="text"
+                            formControlName="nombre_local" class="form-control" placeholder="Nombre del Local" required>
+                    </div>
+
+                    <div class="col-md-4 form-group">
+                        <label for="telefono" class="form-label">Telefono</label>
+                        <input id="telefono" type="number" formControlName="telefono" class="form-control"
+                            placeholder="Telefono" required>
+                    </div>
+
+                    <div class="col-md-8 form-group">
+                        <label for="description" class="form-label">Descripcion del Negocio</label>
+                        <textarea id="description" formControlName="descripcion" class="form-control" cols="30" rows="1"
+                            placeholder="Descripcion..." required></textarea>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="card-body" *ngIf="vendedor == undefined">
+                <h3 class="text-center">No se encontró el registro <img src="assets/img/error/advertencia.png"
+                        width="70px" alt="error"> </h3>
+            </div>
+        </ng-container>
+
 
         <div class="card-footer mt-3">
-            <button type="submit" class="btn btn-primary mr-3">Actualizar cliente</button>
+            <button *ngIf="!load_btn" type="submit" class="btn btn-primary mr-3">Actualizar cliente</button>
+            <button *ngIf="load_btn" disabled type="button" class="btn btn-primary mr-3">
+                <span class="spinner-grow spinner-grow-sm me-2" role="status" aria-hidden="true"></span>
+                Actualizando...
+            </button>
             <a [routerLink]="['/panel/vendedores']" class="btn btn-warning">Regresar</a>
         </div>
     </div>

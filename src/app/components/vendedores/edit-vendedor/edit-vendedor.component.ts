@@ -15,6 +15,8 @@ export class EditVendedorComponent implements OnInit {
   public id: string = '';
   public token: any;
   public vendedor: any = {};
+  public load_btn = false;
+  public load_data = true;
   
   vendedorForm = new FormGroup({
     nombres: new FormControl(''),
@@ -58,8 +60,11 @@ export class EditVendedorComponent implements OnInit {
                 telefono: new FormControl(this.vendedor.telefono),
                 descripcion: new FormControl(this.vendedor.descripcion),
               });
+
+              this.load_data = false;
             }else{
               this.vendedor = undefined;
+              this.load_data = false;
               console.log(response.message)
             }
 
@@ -74,6 +79,7 @@ export class EditVendedorComponent implements OnInit {
   onSubmit(form: any){
     // console.log(form.value);
     if (form.valid) {
+      this.load_btn = true;
       this._adminService.actualizar_vendedor_admin(this.id, this.token, form.value).subscribe(
         response => {
           if(response.data){
@@ -94,6 +100,7 @@ export class EditVendedorComponent implements OnInit {
               message: response.message
             });
           }
+          this.load_btn = false;
         },error => {
           console.log(error);
 
@@ -103,6 +110,7 @@ export class EditVendedorComponent implements OnInit {
             position: 'topRight',
             message: error.error.message
           });
+          this.load_btn = false;
         }
       );
     }else{

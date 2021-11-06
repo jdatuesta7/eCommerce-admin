@@ -30,6 +30,7 @@
             </div>
         </form>
     </div>
+
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered">
@@ -42,7 +43,18 @@
                         <th>Acciones</th>
                     </tr>
                 </thead>
-                <tbody>
+
+                <tbody *ngIf="load_data">
+                    <tr>
+                        <td class="text-center" colspan="5">
+                            <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                                <span class="visually-hidden"></span>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+
+                <tbody *ngIf="!load_data">
                     <tr
                         *ngFor="let item of vendedores| slice: (page-1) * pageSize : (page-1) * pageSize + pageSize; let indice = index">
                         <th scope="row">{{ indice + 1}}</th>
@@ -85,6 +97,7 @@
             </table>
         </div>
     </div>
+    
     <div class="card-footer">
         <ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="vendedores.length"></ngb-pagination>
     </div>

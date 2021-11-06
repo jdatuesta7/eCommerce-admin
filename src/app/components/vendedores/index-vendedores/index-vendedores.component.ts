@@ -17,9 +17,13 @@ export class IndexVendedoresComponent implements OnInit {
   public tipo = '';
   public filtro_apellidos = '';
   public filtro_correo = '';
+
   public page = 1;
   public pageSize = 20;
+
   public token;
+
+  public load_data = true;
 
 
   constructor(
@@ -34,10 +38,11 @@ export class IndexVendedoresComponent implements OnInit {
   }
 
   getVendedores(tipo : any, filtro : any){
+    this.load_data = true;
     this._adminService.listar_vendedores_filtro_admin(tipo, filtro, this.token).subscribe(
       response => {
         this.vendedores = response.data;
-        // console.log(this.vendedores);
+        this.load_data = false;
       },
       error => {
         console.log(error);

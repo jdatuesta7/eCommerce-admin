@@ -14,8 +14,8 @@ declare var iziToast:any;
 export class CreateVendedorComponent implements OnInit {
 
   public vendedor : any = { };
-
   public token : any;
+  public load_btn = false;
 
   vendedorForm = new FormGroup({
     nombres : new FormControl('', Validators.required),
@@ -44,8 +44,7 @@ export class CreateVendedorComponent implements OnInit {
     if(form.valid){
       this.vendedor = form.value;
       this.vendedor.rol = 'vendedor';
-
-      console.log(this.vendedor);
+      this.load_btn = true;
 
       this._adminService.registro_vendedores_admin(this.vendedor, this.token).subscribe(
         response => {
@@ -80,6 +79,8 @@ export class CreateVendedorComponent implements OnInit {
               message: response.message
             });
           }
+
+          this.load_btn = false;
           
         },error => {
           console.log(error);
@@ -88,7 +89,9 @@ export class CreateVendedorComponent implements OnInit {
             color: 'red',
             position: 'topRight',
             message: 'Hubo un error en el servidor'
-          })
+          });
+
+          this.load_btn = false;
         }
       );
 
