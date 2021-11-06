@@ -16,6 +16,8 @@ export class EditClienteComponent implements OnInit {
   public id: string = '';
   public token: any;
   public cliente: any = {};
+  public load_btn = false;
+  public load_data = true;
 
   clienteForm = new FormGroup({
     nombres: new FormControl(''),
@@ -60,9 +62,12 @@ export class EditClienteComponent implements OnInit {
                 dni: new FormControl(this.cliente.dni),
                 genero: new FormControl(this.cliente.genero),
               });
+
+              this.load_data = false;
               
             } else {
               this.cliente = undefined;
+              this.load_data = false;
               console.log(response.message);
             }
 
@@ -77,7 +82,8 @@ export class EditClienteComponent implements OnInit {
   onSubmit(form: any) {
     console.log(this.cliente);
     if(form.valid){
-    
+      
+      this.load_btn = true;
       this._clienteService.actualizar_cliente_admin(this.id, form.value, this.token).subscribe(
         response => {
           if(response.data){
@@ -98,6 +104,8 @@ export class EditClienteComponent implements OnInit {
               message: response.message
             });
           }
+
+          this.load_btn = false;
         },error => {
           console.log(error);
 
@@ -107,6 +115,8 @@ export class EditClienteComponent implements OnInit {
             position: 'topRight',
             message: error.error.message
           });
+
+          this.load_btn = false;
         }
       );
 

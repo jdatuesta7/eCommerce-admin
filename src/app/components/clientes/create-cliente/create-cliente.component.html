@@ -73,7 +73,11 @@
             </div>
         </div>
         <div class="card-footer mt-3">
-            <button type="submit" [disabled]="!clienteForm.valid" class="btn btn-primary mr-3">Crear cliente</button>
+            <button *ngIf="!load_btn" type="submit" [disabled]="!clienteForm.valid" class="btn btn-primary mr-3">Crear cliente</button>
+            <button *ngIf="load_btn" disabled type="button" class="btn btn-primary mr-3">
+                <span class="spinner-grow spinner-grow-sm me-2" role="status" aria-hidden="true"></span>
+                Creando...
+            </button>
             <a [routerLink]="['/panel/clientes']" class="btn btn-warning">Regresar</a>
         </div>
     </div>

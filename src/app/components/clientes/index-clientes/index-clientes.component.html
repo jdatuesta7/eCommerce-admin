@@ -5,7 +5,8 @@
     <h1 class="mt-2 mt-md-4 mb-3 pt-5">Clientes</h1>
     <div class="d-flex flex-wrap flex-md-nowrap justify-content-between">
         <p class="text-muted">Este módulo lista todos los clientes de la tienda.</p>
-        <p class="font-size-sm font-weight-medium pl-md-4"><a class="text-nowrap" [routerLink]="['/panel/clientes/registro']">Registrar
+        <p class="font-size-sm font-weight-medium pl-md-4"><a class="text-nowrap"
+                [routerLink]="['/panel/clientes/registro']">Registrar
                 nuevo<i class="cxi-angle-right font-size-base align-middle ml-1"></i></a></p>
     </div>
 </div>
@@ -17,13 +18,15 @@
     <div class="card-header">
         <form class="form-inline pt-2">
             <label class="sr-only" for="inline-form-input-name">Apellidos</label>
-            <input name="filtro_apellidos" (keyup)="filtro('apellidos')" [(ngModel)]="filtro_apellidos" class="form-control mb-3 mr-sm-4" type="text" id="inline-form-input-name" placeholder="Apellidos">
+            <input name="filtro_apellidos" (keyup)="filtro('apellidos')" [(ngModel)]="filtro_apellidos"
+                class="form-control mb-3 mr-sm-4" type="text" id="inline-form-input-name" placeholder="Apellidos">
             <label class="sr-only" for="inline-form-input-username">Correo</label>
             <div class="input-group mb-3 mr-sm-4">
                 <div class="input-group-prepend">
                     <div class="input-group-text">@</div>
                 </div>
-                <input name="filtro_correo" (keyup)="filtro('correo')" [(ngModel)]="filtro_correo" class="form-control" type="text" id="inline-form-input-username" placeholder="Correo">
+                <input name="filtro_correo" (keyup)="filtro('correo')" [(ngModel)]="filtro_correo" class="form-control"
+                    type="text" id="inline-form-input-username" placeholder="Correo">
             </div>
         </form>
     </div>
@@ -38,53 +41,75 @@
                         <th>Correo</th>
                         <th>Acciones</th>
                     </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let item of clientes| slice: (page-1) * pageSize : (page-1) * pageSize + pageSize; let indice = index">
-                            <th scope="row">{{ indice + 1}}</th>
-                            <td>{{ item.nombres }}</td>
-                            <td>{{ item.apellidos }}</td>
-                            <td>{{ item.email}} </td>
-                            <td>
-                                <div class="btn-group dropdown d-inline-block mb-3 mr-2">
-                                    <button type="button" class="btn btn-outline-secondary btn-sm dropdown-toggle"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Opciones
-                                    </button>
-                                    <div class="dropdown-menu">
-                                        <a [routerLink]="['/panel/clientes/editar/', item._id]" class="dropdown-item">Editar</a>
-                                        <a type="button" style="cursor: pointer;" data-toggle="modal"  [attr.data-target]="'#delete-'+item._id" class="dropdown-item">Eliminar</a>
-                                    </div>
-                                </div>
+                </thead>
 
-                                <div class="modal fade" id="delete-{{item._id}}" tabindex="-1" style="display: none;" aria-hidden="true" >
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                      <div class="modal-content">
+                <tbody *ngIf="load_data">
+                    <tr>
+                        <td class="text-center" colspan="5">
+                            <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                                <span class="visually-hidden"></span>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+
+                <tbody *ngIf="!load_data">
+                    <tr
+                        *ngFor="let item of clientes| slice: (page-1) * pageSize : (page-1) * pageSize + pageSize; let indice = index">
+                        <th scope="row">{{ indice + 1}}</th>
+                        <td>{{ item.nombres }}</td>
+                        <td>{{ item.apellidos }}</td>
+                        <td>{{ item.email}} </td>
+                        <td>
+                            <div class="btn-group dropdown d-inline-block mb-3 mr-2">
+                                <button type="button" class="btn btn-outline-secondary btn-sm dropdown-toggle"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Opciones
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a [routerLink]="['/panel/clientes/editar/', item._id]"
+                                        class="dropdown-item">Editar</a>
+                                    <a type="button" style="cursor: pointer;" data-toggle="modal"
+                                        [attr.data-target]="'#delete-'+item._id" class="dropdown-item">Eliminar</a>
+                                </div>
+                            </div>
+
+                            <div class="modal fade" id="delete-{{item._id}}" tabindex="-1" style="display: none;"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
                                         <div class="modal-header">
-                                          <h4 class="modal-title">Eliminar, {{item.nombres + ' ' +item.apellidos}} </h4>
-                                          <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span area-hidden="true">x</span></button>
+                                            <h4 class="modal-title">Eliminar, {{item.nombres + ' ' +item.apellidos}}
+                                            </h4>
+                                            <button class="close" type="button" data-dismiss="modal"
+                                                aria-label="Close"><span area-hidden="true">x</span></button>
                                         </div>
                                         <div class="modal-body">
-                                          <p class="fs-sm">¿ Desea eliminar este cliente ?</p>
+                                            <p class="fs-sm">¿ Desea eliminar este cliente ?</p>
                                         </div>
                                         <div class="modal-footer">
-                                          <button class="btn btn-secondary btn-sm" type="button" data-dismiss="modal">Cancelar</button>
-                                          <button class="btn btn-primary btn-sm" (click)="eliminar(item._id)" type="button">Confirmar</button>
+                                            <button class="btn btn-secondary btn-sm" type="button"
+                                                data-dismiss="modal">Cancelar</button>
+                                            <button *ngIf="!load_btn" class="btn btn-primary btn-sm"
+                                                (click)="eliminar(item._id)" type="button">Confirmar</button>
+                                            <button *ngIf="load_btn" disabled type="button"
+                                                class="btn btn-primary btn-sm">
+                                                <span class="spinner-grow spinner-grow-sm me-2" role="status"
+                                                    aria-hidden="true"></span>
+                                                Eliminando...
+                                            </button>
                                         </div>
-                                      </div>
                                     </div>
                                 </div>
-                            </td>
-                        </tr>
-                    </tbody>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+
             </table>
         </div>
     </div>
     <div class="card-footer">
-        <ngb-pagination 
-            [(page)]="page" 
-            [pageSize]="pageSize"
-            [collectionSize]="clientes.length"
-        ></ngb-pagination>
+        <ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="clientes.length"></ngb-pagination>
     </div>
 </div>

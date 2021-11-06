@@ -18,15 +18,18 @@ export class IndexClientesComponent implements OnInit {
   public tipo = '';
   public filtro_apellidos = '';
   public filtro_correo = '';
+
   public page = 1;
   public pageSize = 20;
   public token;
+
+  public load_data = true;
+  public load_btn = false;
 
 
   constructor(
     private _clienteService : ClienteService,
     private _adminService : AdminService,
-    private _router : Router
   ) { 
     this.token = this._adminService.getToken();
   }
@@ -36,10 +39,11 @@ export class IndexClientesComponent implements OnInit {
   }
 
   getClientes(tipo : any, filtro : any){
+    this.load_data = true;
     this._clienteService.listar_clientes_filtro_admin(tipo, filtro, this.token).subscribe(
       response => {
         this.clientes = response.data;
-        // console.log(this.clientes);
+        this.load_data = false;
       },
       error => {
         console.log(error);
@@ -59,6 +63,7 @@ export class IndexClientesComponent implements OnInit {
 
   eliminar(id: any){
 
+    this.load_btn = true;
     this._clienteService.eliminar_cliente_admin(id, this.token).subscribe(
       response => {
         iziToast.show({
@@ -72,7 +77,7 @@ export class IndexClientesComponent implements OnInit {
         $('.modal-backdrop').removeClass('show');
 
         this.getClientes(null, null);
-        
+        this.load_btn = false;
       },error => {
         iziToast.show({
           title: 'OK',
@@ -80,6 +85,7 @@ export class IndexClientesComponent implements OnInit {
           position: 'topRight',
           message: 'ha ocurrido un error en el servidor'
         });
+        this.load_btn = false;
       }
     );
 

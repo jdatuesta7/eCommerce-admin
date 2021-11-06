@@ -14,74 +14,86 @@
             <h5 style="margin-bottom: 0px;">Actualizar cliente</h5>
         </div>
 
-        <div class="card-body"  *ngIf="cliente != undefined">
-
-            <div class="row">
-                <div class="col-md-4 form-group">
-                    <label for="nombres" class="form-label">Nombres</label>
-                    <input id="nombres" type="text" formControlName="nombres" class="form-control" placeholder="Nombres"
-                        required>
-                </div>
-                <div class="col-md-4 form-group">
-                    <label for="apellidos" class="form-label">Apellidos</label>
-                    <input id="apellidos" type="text" formControlName="apellidos" class="form-control"
-                        placeholder="Apellidos" required>
-                </div>
-                <div class="col-md-4 form-group">
-                    <label for="email" class="form-label">Correo electrónico</label>
-                    <input id="email" type="email" formControlName="email" class="form-control"
-                        placeholder="Correo electrónico" required>
-                </div>
-
-                <div class="col-md-4 form-group">
-                    <label for="telefono" class="form-label">Telefono</label>
-                    <input id="telefono" type="number" formControlName="telefono" class="form-control"
-                        placeholder="Telefono" required>
-                </div>
-                <div class="col-md-4 form-group">
-                    <label for="fechaNacimiento" class="form-label">Fecha nacimiento</label>
-                    <input id="fechaNacimiento" type="date" formControlName="f_nacimiento" class="form-control"
-                        required>
-                </div>
-                <div class="col-md-4 form-group">
-                    <label for="DNI" class="form-label">DNI</label>
-                    <input id="DNI" type="number" formControlName="dni" class="form-control" placeholder="DNI" required>
-                </div>
-
-                <div class="col-md-4">
-                    <label for="genero" class="form-label">Genero</label>
-                    <select required id="genero" formControlName="genero" class="form-control custom-select">
-                        <option value="" selected disabled>Seleccionar...</option>
-                        <option value="Masculino">Masculino</option>
-                        <option value="Femenino">Femenino</option>
-                    </select>
-                </div>
-
-                <div class="col-md-4">
-                    <label for="ciudad" class="form-label">Ciudad</label>
-                    <select required id="ciudad" formControlName="ciudad" class="form-control custom-select">
-                        <option value="" selected disabled>Seleccionar...</option>
-                        <option value="Ciudad 1">Ciudad 1</option>
-                        <option value="Ciudad 2">Ciudad 2</option>
-                        <option value="Ciudad 2">Ciudad 3</option>
-                    </select>
-                </div>
-
-                <!-- <div class="col-md-4 form-group">
-                    <label for="password" class="form-label">Contraseña</label>
-                    <input id="password" type="text" formControlName="password" class="form-control"
-                        placeholder="Contraseña" required>
-                </div> -->
+        <ng-container *ngIf="load_data">
+            <div class="spinner-border mx-auto mb-2 mt-2" style="width: 5rem; height: 5rem;" role="status">
+                <span class="visually-hidden"></span>
             </div>
+        </ng-container>
+
+        <ng-container *ngIf="!load_data">
+            <div class="card-body"  *ngIf="cliente != undefined">
             
-        </div>
+                <div class="row">
+                    <div class="col-md-4 form-group">
+                        <label for="nombres" class="form-label">Nombres</label>
+                        <input id="nombres" type="text" formControlName="nombres" class="form-control" placeholder="Nombres"
+                            required>
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label for="apellidos" class="form-label">Apellidos</label>
+                        <input id="apellidos" type="text" formControlName="apellidos" class="form-control"
+                            placeholder="Apellidos" required>
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label for="email" class="form-label">Correo electrónico</label>
+                        <input id="email" type="email" formControlName="email" class="form-control"
+                            placeholder="Correo electrónico" required>
+                    </div>
+    
+                    <div class="col-md-4 form-group">
+                        <label for="telefono" class="form-label">Telefono</label>
+                        <input id="telefono" type="number" formControlName="telefono" class="form-control"
+                            placeholder="Telefono" required>
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label for="fechaNacimiento" class="form-label">Fecha nacimiento</label>
+                        <input id="fechaNacimiento" type="date" formControlName="f_nacimiento" class="form-control"
+                            required>
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label for="DNI" class="form-label">DNI</label>
+                        <input id="DNI" type="number" formControlName="dni" class="form-control" placeholder="DNI" required>
+                    </div>
+    
+                    <div class="col-md-4">
+                        <label for="genero" class="form-label">Genero</label>
+                        <select required id="genero" formControlName="genero" class="form-control custom-select">
+                            <option value="" selected disabled>Seleccionar...</option>
+                            <option value="Masculino">Masculino</option>
+                            <option value="Femenino">Femenino</option>
+                        </select>
+                    </div>
+    
+                    <div class="col-md-4">
+                        <label for="ciudad" class="form-label">Ciudad</label>
+                        <select required id="ciudad" formControlName="ciudad" class="form-control custom-select">
+                            <option value="" selected disabled>Seleccionar...</option>
+                            <option value="Ciudad 1">Ciudad 1</option>
+                            <option value="Ciudad 2">Ciudad 2</option>
+                            <option value="Ciudad 2">Ciudad 3</option>
+                        </select>
+                    </div>
+    
+                    <!-- <div class="col-md-4 form-group">
+                        <label for="password" class="form-label">Contraseña</label>
+                        <input id="password" type="text" formControlName="password" class="form-control"
+                            placeholder="Contraseña" required>
+                    </div> -->
+                </div>
+                
+            </div>
+    
+            <div class="card-body" *ngIf="cliente == undefined">
+                <h3 class="text-center">No se encontró el registro <img src="assets/img/error/advertencia.png" width="70px" alt="error"> </h3>
+            </div>
+        </ng-container>
 
-        <div class="card-body" *ngIf="cliente == undefined">
-            <h3 class="text-center">No se encontró el registro <img src="assets/img/error/advertencia.png" width="70px" alt="error"> </h3>
-        </div>
-
-        <div class="card-footer mt-3">
-            <button type="submit" class="btn btn-primary mr-3">Actualizar cliente</button>
+        <div *ngIf="!load_data" class="card-footer mt-3">
+            <button *ngIf="!load_btn" type="submit" class="btn btn-primary mr-3">Actualizar cliente</button>
+            <button *ngIf="load_btn" disabled type="button" class="btn btn-primary mr-3">
+                <span class="spinner-grow spinner-grow-sm me-2" role="status" aria-hidden="true"></span>
+                Actualizando...
+            </button>
             <a [routerLink]="['/panel/clientes']" class="btn btn-warning">Regresar</a>
         </div>
     </div>

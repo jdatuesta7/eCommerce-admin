@@ -15,6 +15,7 @@ export class CreateClienteComponent implements OnInit {
 
   public cliente : any = {};
   public token : any;
+  public load_btn = false;
 
   clienteForm = new FormGroup({
     nombres : new FormControl('', Validators.required),
@@ -44,7 +45,7 @@ export class CreateClienteComponent implements OnInit {
     if(form.valid){
 
       this.cliente = form.value;
-
+      this.load_btn = true;
       this._clienteService.registro_cliente_admin(this.cliente, this.token).subscribe(
         response => {
           console.log(response);
@@ -79,6 +80,8 @@ export class CreateClienteComponent implements OnInit {
             });
           }
           
+          this.load_btn = false;
+
         },error => {
           console.log(error);
 
@@ -88,6 +91,8 @@ export class CreateClienteComponent implements OnInit {
             position: 'topRight',
             message: 'Hubo un error en el servidor'
           })
+
+          this.load_btn = false;
         }
       );
 
