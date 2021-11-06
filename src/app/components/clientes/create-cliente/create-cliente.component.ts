@@ -41,53 +41,57 @@ export class CreateClienteComponent implements OnInit {
 
   onSubmit(form : any){
 
-    this.cliente = form;
+    if(form.valid){
 
-    this._clienteService.registro_cliente_admin(this.cliente, this.token).subscribe(
-      response => {
-        console.log(response);
-        if(response.data){
-          iziToast.show({
-            title: 'OK',
-            color: 'green',
-            position: 'topRight',
-            message: 'se ha registrado correctamente el cliente'
-          });
+      this.cliente = form.value;
 
-          this.clienteForm = new FormGroup({
-            nombres : new FormControl(''),
-            apellidos : new FormControl(''),
-            ciudad : new FormControl(''),
-            email : new FormControl(''),
-            password : new FormControl(''),
-            telefono : new FormControl(''),
-            fechaNacimiento : new FormControl(''),
-            DNI : new FormControl(''),
-            genero : new FormControl(''),
-          });
+      this._clienteService.registro_cliente_admin(this.cliente, this.token).subscribe(
+        response => {
+          console.log(response);
+          if(response.data){
+            iziToast.show({
+              title: 'OK',
+              color: 'green',
+              position: 'topRight',
+              message: 'se ha registrado correctamente el cliente'
+            });
 
-          this._router.navigate(['/panel/clientes']);
+            this.clienteForm = new FormGroup({
+              nombres : new FormControl(''),
+              apellidos : new FormControl(''),
+              ciudad : new FormControl(''),
+              email : new FormControl(''),
+              password : new FormControl(''),
+              telefono : new FormControl(''),
+              fechaNacimiento : new FormControl(''),
+              DNI : new FormControl(''),
+              genero : new FormControl(''),
+            });
 
-        }else{
+            this._router.navigate(['/panel/clientes']);
+
+          }else{
+            iziToast.show({
+              title: 'ERROR',
+              color: 'red',
+              position: 'topRight',
+              message: response.message
+            });
+          }
+          
+        },error => {
+          console.log(error);
+
           iziToast.show({
             title: 'ERROR',
             color: 'red',
             position: 'topRight',
-            message: response.message
-          });
+            message: 'Hubo un error en el servidor'
+          })
         }
-        
-      },error => {
-        console.log(error);
+      );
 
-        iziToast.show({
-          title: 'ERROR',
-          color: 'red',
-          position: 'topRight',
-          message: 'Hubo un error en el servidor'
-        })
-      }
-    );
+    }
 
   }
 

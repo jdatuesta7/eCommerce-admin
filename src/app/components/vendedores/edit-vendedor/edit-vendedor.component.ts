@@ -101,7 +101,7 @@ export class EditVendedorComponent implements OnInit {
             title: 'ERROR',
             color: 'red',
             position: 'topRight',
-            message: 'Hubo un error en el servidor'
+            message: error.error.message
           });
         }
       );
