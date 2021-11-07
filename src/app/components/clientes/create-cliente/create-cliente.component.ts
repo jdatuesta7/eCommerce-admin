@@ -96,6 +96,13 @@ export class CreateClienteComponent implements OnInit {
         }
       );
 
+    }else{
+      iziToast.show({
+        title: 'ERROR',
+        color: 'red',
+        position: 'topRight',
+        message: 'Porfavor complete todos los campos correctamente'
+      });
     }
 
   }

@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClient, HttpClientModule } from "@angular/common/http";
 import { NgbPaginationModule } from "@ng-bootstrap/ng-bootstrap";
+import { NgxTinymceModule } from 'ngx-tinymce';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,6 +17,7 @@ import { IndexVendedoresComponent } from './components/vendedores/index-vendedor
 import { CreateVendedorComponent } from './components/vendedores/create-vendedor/create-vendedor.component';
 import { EditClienteComponent } from './components/clientes/edit-cliente/edit-cliente.component';
 import { EditVendedorComponent } from './components/vendedores/edit-vendedor/edit-vendedor.component';
+import { CreateProductoComponent } from './components/productos/create-producto/create-producto.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { EditVendedorComponent } from './components/vendedores/edit-vendedor/edi
     IndexVendedoresComponent,
     CreateVendedorComponent,
     EditClienteComponent,
-    EditVendedorComponent
+    EditVendedorComponent,
+    CreateProductoComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +40,10 @@ import { EditVendedorComponent } from './components/vendedores/edit-vendedor/edi
     ReactiveFormsModule,
     HttpClientModule,
     routing,
-    NgbPaginationModule
+    NgbPaginationModule,
+    NgxTinymceModule.forRoot({
+      baseURL: '../../../assets/tinymce/'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

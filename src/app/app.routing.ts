@@ -10,6 +10,7 @@ import { IndexVendedoresComponent } from "./components/vendedores/index-vendedor
 import { CreateVendedorComponent } from "./components/vendedores/create-vendedor/create-vendedor.component";
 import { EditClienteComponent } from "./components/clientes/edit-cliente/edit-cliente.component";
 import { EditVendedorComponent } from "./components/vendedores/edit-vendedor/edit-vendedor.component";
+import { CreateProductoComponent } from "./components/productos/create-producto/create-producto.component";
 
 const appRoute: Routes = [
     {path: '', component: LoginComponent},
@@ -23,8 +24,9 @@ const appRoute: Routes = [
 
         {path: 'vendedores', component: IndexVendedoresComponent, canActivate: [AdminGuard]},
         {path: 'vendedores/registro', component: CreateVendedorComponent, canActivate: [AdminGuard]},
-        {path: 'vendedores/editar/:id', component: EditVendedorComponent, canActivate: [AdminGuard]}
+        {path: 'vendedores/editar/:id', component: EditVendedorComponent, canActivate: [AdminGuard]},
 
+        {path: 'productos/registro', component:CreateProductoComponent},
     ]}
 ];
 
