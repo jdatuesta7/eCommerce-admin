@@ -71,8 +71,18 @@
             </div>
         </div>
         <div class="card-footer">
-            <button class="btn btn-primary mr-3" type="submit">Crear producto</button>
-            <a class="btn btn-warning">Regresar</a>
+            <button *ngIf="!load_btn" class="btn btn-primary mr-3" type="submit">Crear producto</button>
+            <button *ngIf="load_btn" disabled type="button" class="btn btn-primary mr-3">
+                <span class="spinner-grow spinner-grow-sm me-2" role="status" aria-hidden="true"></span>
+                Creando...
+            </button>
+
+            <ng-template [ngIf]="usuario.rol == 'vendedor'">
+                <a [routerLink]="['/panel/productos/show', usuario._id]" class="btn btn-warning">Regresar</a>
+            </ng-template>
+            <ng-template [ngIf]="usuario.rol == 'admin'">
+                <a [routerLink]="['/panel/productos']" class="btn btn-warning">Regresar</a>
+            </ng-template>
         </div>
     </div>
 </form>

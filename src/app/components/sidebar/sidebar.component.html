@@ -13,7 +13,7 @@
         <li class="nav-item">
             <a class="nav-link py-0" href="../components/typography.html">
                 <i class="cxi-profile align-middle mt-n1 mr-2"></i>
-                Cuenta
+                {{ usuario.nombres + ' ' + usuario.apellidos}}
             </a>
         </li>
 
@@ -40,9 +40,11 @@
         <hr class="hr-gradient hr-light mb-2 opacity-25">
         <nav class="nav nav-light">
             <a class="nav-link px-4" [routerLink]="['/inicio']" routerLinkActive="active">Inicio</a>
-            <a class="nav-link px-4" [routerLink]="['/panel/clientes']" routerLinkActive="active">Clientes</a>
-            <a class="nav-link px-4" [routerLink]="['/panel/vendedores']" routerLinkActive="active">Vendedores</a>
-            <a class="nav-link px-4" [routerLink]="['/panel/productos/registro']" routerLinkActive="active">Productos</a>
+            <ng-template [ngIf]="usuario.rol == 'admin'">
+                <a class="nav-link px-4" [routerLink]="['/panel/clientes']" routerLinkActive="active">Clientes</a>
+                <a class="nav-link px-4" [routerLink]="['/panel/vendedores']" routerLinkActive="active">Vendedores</a>
+            </ng-template>
+            <a class="nav-link px-4" [routerLink]="['/panel/productos']" routerLinkActive="active">Productos</a>
 
         </nav>
     </div>

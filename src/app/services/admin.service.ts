@@ -24,6 +24,10 @@ export class AdminService {
     return localStorage.getItem('token');
   }
 
+  getUser(){
+    return JSON.parse(localStorage.getItem('usuario') || '{}');
+  }
+
   public isAuthenticated(allowRoles: string[]):boolean{
 
     const token = localStorage.getItem('token');
@@ -50,6 +54,11 @@ export class AdminService {
     }
     
     return allowRoles.includes(decodedToken['role']);
+  }
+
+  obtener_usuario_autenticado(token:any):Observable<any>{
+    let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
+    return this._http.get(this.url+'obtener_usuario_autenticado/', {headers: headers});
   }
 
   listar_vendedores_filtro_admin(tipo:any, filtro:any, token:any):Observable<any>{

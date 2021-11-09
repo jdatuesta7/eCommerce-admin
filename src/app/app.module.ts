@@ -18,6 +18,7 @@ import { CreateVendedorComponent } from './components/vendedores/create-vendedor
 import { EditClienteComponent } from './components/clientes/edit-cliente/edit-cliente.component';
 import { EditVendedorComponent } from './components/vendedores/edit-vendedor/edit-vendedor.component';
 import { CreateProductoComponent } from './components/productos/create-producto/create-producto.component';
+import { IndexProductosComponent } from './components/productos/index-productos/index-productos.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { CreateProductoComponent } from './components/productos/create-producto/
     CreateVendedorComponent,
     EditClienteComponent,
     EditVendedorComponent,
-    CreateProductoComponent
+    CreateProductoComponent,
+    IndexProductosComponent
   ],
   imports: [
     BrowserModule,

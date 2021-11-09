@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AdminService } from 'src/app/services/admin.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,9 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor() { }
+  public usuario: any = {};
+  public token: any = '';
+
+  constructor(
+    private _adminService: AdminService,
+    private _router: Router
+  ) {
+    this.token = this._adminService.getToken();
+    
+    this.usuario = this._adminService.getUser();
+  }
 
   ngOnInit(): void {
+    if(!this.token){
+      this._router.navigate(['/']);
+    }
   }
 
 }

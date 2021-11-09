@@ -24,8 +24,14 @@ export class ProductoService {
     fd.append('categoria', data.categoria);
     fd.append('descripcion', data.descripcion);
     fd.append('contenido', data.contenido);
+    fd.append('admin', data.admin);
     fd.append('portada', file);
 
     return this._http.post(this.url+'registro_producto', fd, {headers: headers});
+  }
+
+  listar_productos(filtro:any, token:any, id:any):Observable<any>{
+    let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
+    return this._http.get(this.url+'listar_productos/'+id+'/'+filtro, {headers: headers});
   }
 }

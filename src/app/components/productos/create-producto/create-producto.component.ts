@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { Router } from '@angular/router';
 import { AdminService } from 'src/app/services/admin.service';
 import { ProductoService } from 'src/app/services/producto.service';
 
@@ -19,6 +20,8 @@ export class CreateProductoComponent implements OnInit {
   public imgSelect : any | ArrayBuffer = 'assets/img/default-placeholder.png';
   public config : any = {};
   public token : any;
+  public load_btn = false;
+  public usuario : any = {};
   
   productoForm = new FormGroup({
     titulo : new FormControl('', Validators.required),
@@ -30,12 +33,13 @@ export class CreateProductoComponent implements OnInit {
   });
   constructor(
     private _productoService : ProductoService,
-    private _adminService : AdminService
+    private _adminService : AdminService,
+    private _router : Router
   ) {
     this.config = {
       height: 500
     }
-
+    this.usuario = this._adminService.getUser();
     this.token = this._adminService.getToken();
    }
 
@@ -45,14 +49,42 @@ export class CreateProductoComponent implements OnInit {
   onSubmit(form:any){
     if(form.valid){
       this.producto = form.value;
-      console.log(this.producto);
-      console.log(this.file);
+      this.producto.admin = this._adminService.getUser()._id;
 
+      this.load_btn = true;
       this._productoService.registro_producto(this.producto, this.file, this.token).subscribe(
         response =>{
           console.log(response);
+          
+          iziToast.show({
+            title: 'OK',
+            color: 'green',
+            position: 'topRight',
+            message: 'se ha registrado correctamente el producto'
+          });
+
+          this.load_btn = false;
+
+          this.productoForm = new FormGroup({
+            titulo : new FormControl(''),
+            stock : new FormControl(''),
+            precio : new FormControl(''),
+            categoria : new FormControl(''),
+            descripcion : new FormControl(''),
+            contenido : new FormControl('')
+          });
+
+          this._router.navigate(['/panel/productos/show/', this._adminService.getUser()._id]);
+          
         },error =>{
           console.log(error);
+          iziToast.show({
+            title: 'ERROR',
+            color: 'red',
+            position: 'topRight',
+            message: error.error.message
+          });
+          this.load_btn = false;
         }
       );
     }else{
@@ -62,6 +94,7 @@ export class CreateProductoComponent implements OnInit {
         position: 'topRight',
         message: 'Porfavor complete todos los campos correctamente'
       });
+      
     }
   }
 
