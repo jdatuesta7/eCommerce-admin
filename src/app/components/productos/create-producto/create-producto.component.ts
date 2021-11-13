@@ -74,7 +74,7 @@ export class CreateProductoComponent implements OnInit {
             contenido : new FormControl('')
           });
 
-          this._router.navigate(['/panel/productos/show/', this._adminService.getUser()._id]);
+          this._router.navigate(['/panel/productos']);
           
         },error =>{
           console.log(error);

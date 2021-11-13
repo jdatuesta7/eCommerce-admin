@@ -19,6 +19,7 @@ import { EditClienteComponent } from './components/clientes/edit-cliente/edit-cl
 import { EditVendedorComponent } from './components/vendedores/edit-vendedor/edit-vendedor.component';
 import { CreateProductoComponent } from './components/productos/create-producto/create-producto.component';
 import { IndexProductosComponent } from './components/productos/index-productos/index-productos.component';
+import { InventarioProductoComponent } from './components/productos/inventario-producto/inventario-producto.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { IndexProductosComponent } from './components/productos/index-productos/
     EditClienteComponent,
     EditVendedorComponent,
     CreateProductoComponent,
-    IndexProductosComponent
+    IndexProductosComponent,
+    InventarioProductoComponent
   ],
   imports: [
     BrowserModule,

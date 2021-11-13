@@ -23,7 +23,7 @@ export class CreateVendedorComponent implements OnInit {
     email : new FormControl('', Validators.required),
     password : new FormControl('', Validators.required),
     telefono : new FormControl('', Validators.required),
-    DNI : new FormControl('', Validators.required),
+    dni : new FormControl('', Validators.required),
     id_local : new FormControl('', Validators.required),
     nombre_local : new FormControl('', Validators.required),
     descripcion : new FormControl('', Validators.required)
@@ -63,7 +63,7 @@ export class CreateVendedorComponent implements OnInit {
               email : new FormControl(''),
               password : new FormControl(''),
               telefono : new FormControl(''),
-              DNI : new FormControl(''),
+              dni : new FormControl(''),
               id_local : new FormControl(''),
               nombre_local : new FormControl(''),
               descripcion : new FormControl('')
@@ -95,6 +95,14 @@ export class CreateVendedorComponent implements OnInit {
         }
       );
 
+    }else{
+      iziToast.show({
+        title: 'ERROR',
+        color: 'red',
+        position: 'topRight',
+        message: 'Porfavor complete todos los campos correctamente'
+      });
+      this.load_btn = false;
     }
 
     

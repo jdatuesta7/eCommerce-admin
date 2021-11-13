@@ -34,4 +34,14 @@ export class ProductoService {
     let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
     return this._http.get(this.url+'listar_productos/'+id+'/'+filtro, {headers: headers});
   }
+
+  obtener_producto(id:any, token:any):Observable<any>{
+    let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
+    return this._http.get(this.url+'obtener_producto/'+id, {headers: headers});
+  }
+
+  // listar_inventario_producto(id:any, token:any):Observable<any>{
+  //   let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
+  //   return this._http.get(this.url+'obtener_producto/'+id, {headers: headers});
+  // }
 }

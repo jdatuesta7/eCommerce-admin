@@ -42,12 +42,13 @@
 
                         <div class="col-lg-12 form-group">
                             <label for="">Descripción corta</label>
-                            <textarea formControlName="descripcion" class="form-control" placeholder="Titulo de producto" required
+                            <textarea formControlName="descripcion" class="form-control" placeholder="Descripcion breve del producto" required
                                 rows="5"></textarea>
                         </div>
 
                         <div class="col-lg-12 form-group">
-                            <tinymce [config]="config" formControlName="contenido"></tinymce>
+                            <label for="">Descripcion detallada</label>
+                            <tinymce placeholder="Descripcion detallada del producto..." [config]="config" formControlName="contenido"></tinymce>
                         </div>
 
                     </div>
@@ -76,13 +77,7 @@
                 <span class="spinner-grow spinner-grow-sm me-2" role="status" aria-hidden="true"></span>
                 Creando...
             </button>
-
-            <ng-template [ngIf]="usuario.rol == 'vendedor'">
-                <a [routerLink]="['/panel/productos/show', usuario._id]" class="btn btn-warning">Regresar</a>
-            </ng-template>
-            <ng-template [ngIf]="usuario.rol == 'admin'">
-                <a [routerLink]="['/panel/productos']" class="btn btn-warning">Regresar</a>
-            </ng-template>
+            <a [routerLink]="['/panel/productos']" class="btn btn-warning">Regresar</a>
         </div>
     </div>
 </form>
