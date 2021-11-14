@@ -40,8 +40,18 @@ export class ProductoService {
     return this._http.get(this.url+'obtener_producto/'+id, {headers: headers});
   }
 
-  // listar_inventario_producto(id:any, token:any):Observable<any>{
-  //   let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
-  //   return this._http.get(this.url+'obtener_producto/'+id, {headers: headers});
-  // }
+  listar_inventario_producto(id:any, token:any):Observable<any>{
+    let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
+    return this._http.get(this.url+'listar_inventario_producto/'+id, {headers: headers});
+  }
+
+  eliminar_inventario_producto(id:any, token:any):Observable<any>{
+    let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
+    return this._http.delete(this.url+'eliminar_inventario_producto/'+id, {headers: headers});
+  }
+
+  registro_inventario_producto(data:any, token:any):Observable<any>{
+    let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
+    return this._http.post(this.url+'registro_inventario_producto/', data, {headers: headers});
+  }
 }
