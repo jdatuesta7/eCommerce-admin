@@ -56,11 +56,6 @@ export class AdminService {
     return allowRoles.includes(decodedToken['role']);
   }
 
-  obtener_usuario_autenticado(token:any):Observable<any>{
-    let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
-    return this._http.get(this.url+'obtener_usuario_autenticado/', {headers: headers});
-  }
-
   listar_vendedores_filtro_admin(tipo:any, filtro:any, token:any):Observable<any>{
     let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
     return this._http.get(this.url+'listar_vendedores_filtro_admin/'+tipo+'/'+filtro, {headers: headers});
@@ -84,5 +79,15 @@ export class AdminService {
   eliminar_vendedor_admin(id:any, token:any):Observable<any>{
     let headers = new HttpHeaders({'Content-Type':'application/json', 'Authorization': token});
     return this._http.delete(this.url+'/eliminar_vendedor_admin/'+id, {headers: headers});
+  }
+
+  obtener_categorias_admin(token:any):Observable<any>{
+    let headers = new HttpHeaders({'Content-Type':'application/json', 'Authorization': token});
+    return this._http.get(this.url+'/obtener_categorias_admin', {headers: headers});
+  }
+
+  actualizar_categorias_admin(id:any, data:any, token:any):Observable<any>{
+    let headers = new HttpHeaders({'Content-Type':'application/json', 'Authorization': token});
+    return this._http.put(this.url+'/actualizar_categorias_admin/'+id, data, {headers: headers});
   }
 }
