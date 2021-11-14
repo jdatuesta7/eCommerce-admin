@@ -44,6 +44,7 @@ export class CreateVendedorComponent implements OnInit {
     if(form.valid){
       this.vendedor = form.value;
       this.vendedor.rol = 'vendedor';
+      this.vendedor.nombre_local = this.vendedor.nombre_local.toUpperCase();
       this.load_btn = true;
 
       this._adminService.registro_vendedores_admin(this.vendedor, this.token).subscribe(

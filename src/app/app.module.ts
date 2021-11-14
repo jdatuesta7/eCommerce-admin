@@ -20,6 +20,7 @@ import { EditVendedorComponent } from './components/vendedores/edit-vendedor/edi
 import { CreateProductoComponent } from './components/productos/create-producto/create-producto.component';
 import { IndexProductosComponent } from './components/productos/index-productos/index-productos.component';
 import { InventarioProductoComponent } from './components/productos/inventario-producto/inventario-producto.component';
+import { CreateCuponComponent } from './components/cupones/create-cupon/create-cupon.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { InventarioProductoComponent } from './components/productos/inventario-p
     EditVendedorComponent,
     CreateProductoComponent,
     IndexProductosComponent,
-    InventarioProductoComponent
+    InventarioProductoComponent,
+    CreateCuponComponent,
   ],
   imports: [
     BrowserModule,

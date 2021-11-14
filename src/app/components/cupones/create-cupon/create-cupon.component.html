@@ -1,0 +1,74 @@
+<app-sidebar></app-sidebar>
+<!-- Page title-->
+<div class="border-bottom pt-5 mt-2 mb-5">
+    <h1 class="mt-2 mt-md-4 mb-3 pt-5">Registrar Cupones</h1>
+    <div class="d-flex flex-wrap flex-md-nowrap justify-content-between">
+        <p class="text-muted">Este módulo registra el cupon</p>
+    </div>
+</div>
+
+<form #registroForm="ngForm" (ngSubmit)="registroCupon(registroForm)">
+    <div class="card box-shadow-sm">
+        <div class="card-header">
+            <h5 style="margin-bottom: 0px;">Registro de cliente</h5>
+        </div>
+        <div class="card-body">
+
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label for="codigo" class="form-label">Codigo de cupon</label>
+                    <input style="text-transform:uppercase;" id="codigo" type="text" [(ngModel)]="cupon.codigo" name="codigo"  class="form-control"
+                        placeholder="Codigo de cupon" required>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="tipo" class="form-label">Tipo</label>
+                    <select required id="tipo" name="tipo" [(ngModel)]="cupon.tipo" class="form-control custom-select">
+                        <option value="" selected disabled>Seleccionar...</option>
+                        <option value="Porcentaje">Valor Porcentual (%)</option>
+                        <option value="Valor Fijo">Valor Fijo ($)</option>
+                    </select>
+                </div>
+
+                <div class="col-md-6" *ngIf="cupon.tipo == 'Porcentaje'">
+                    <label for="valor" class="form-label">Valor Porcentual</label>
+                    <div class="input-group">
+                        <input id="valor" step=".01" type="number" min="0" name="valor" [(ngModel)]="cupon.valor"
+                        class="form-control" placeholder="Porcentaje del descuento" required>
+                        <div class="input-group-append">
+                            <span class="input-group-text">%</span>
+                          </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6" *ngIf="cupon.tipo == 'Valor Fijo'">
+                    <label for="valor" class="form-label">Valor Fijo</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">$</span>
+                        </div>
+                        <input id="valor" step=".01" type="number" min="0" name="valor" [(ngModel)]="cupon.valor"
+                            class="form-control" placeholder="Valor Fijo" required>
+                    </div>
+                </div>
+
+                <div class="col-md-6 form-group">
+                    <label for="limite" class="form-label">Limite</label>
+                    <input id="limite" type="number" name="limite" [(ngModel)]="cupon.limite" class="form-control"
+                        placeholder="limite de canjeo" required>
+                </div>
+
+
+            </div>
+            <div class="card-footer mt-3">
+                <button *ngIf="!load_btn" type="submit" [disabled]="!registroForm.valid"
+                    class="btn btn-primary mr-3">Crear cliente</button>
+                <button *ngIf="load_btn" disabled type="button" class="btn btn-primary mr-3">
+                    <span class="spinner-grow spinner-grow-sm me-2" role="status" aria-hidden="true"></span>
+                    Creando...
+                </button>
+                <a [routerLink]="['/panel/clientes']" class="btn btn-warning">Regresar</a>
+            </div>
+        </div>
+    </div>
+</form>
