@@ -1,4 +1,6 @@
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CuponService } from 'src/app/services/cupon.service';
 
 declare var iziToast:any;
@@ -18,6 +20,7 @@ export class CreateCuponComponent implements OnInit {
 
   constructor(
     private _cuponService: CuponService,
+    private _router : Router
   ) { 
     this.token = localStorage.getItem('token');
   }
@@ -29,6 +32,7 @@ export class CreateCuponComponent implements OnInit {
     if(form.valid){
       form.value.codigo = form.value.codigo.toUpperCase();
       console.log(form.value);
+      this.load_btn = true;
       this._cuponService.registro_cupon_admin(form.value, this.token).subscribe(
         response => {
           console.log(response);
@@ -38,6 +42,9 @@ export class CreateCuponComponent implements OnInit {
             position: 'topRight',
             message: 'se ha registrado correctamente el cupon'
           });
+          this.load_btn = false;
+          
+          this._router.navigate(['/panel/cupones']);
         },
         error => {
           console.log(error);
@@ -50,6 +57,8 @@ export class CreateCuponComponent implements OnInit {
         position: 'topRight',
         message: 'Porfavor complete todos los campos correctamente'
       });
+
+      this.load_btn = false;
     }
   }
 
