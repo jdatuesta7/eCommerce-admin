@@ -68,9 +68,7 @@
                         <label for="ciudad" class="form-label">Ciudad</label>
                         <select required id="ciudad" formControlName="ciudad" class="form-control custom-select">
                             <option value="" selected disabled>Seleccionar...</option>
-                            <option value="Ciudad 1">Ciudad 1</option>
-                            <option value="Ciudad 2">Ciudad 2</option>
-                            <option value="Ciudad 2">Ciudad 3</option>
+                            <option *ngFor="let item of arr_municipios.sort()" value="{{item}}">{{item}}</option>
                         </select>
                     </div>
     

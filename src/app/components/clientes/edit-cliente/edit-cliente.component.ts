@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdminService } from 'src/app/services/admin.service';
+import { CiudadesService } from 'src/app/services/ciudades.service';
 import { ClienteService } from 'src/app/services/cliente.service';
 
 declare var iziToast:any;
@@ -18,6 +19,8 @@ export class EditClienteComponent implements OnInit {
   public cliente: any = {};
   public load_btn = false;
   public load_data = true;
+  public colombia_lugares : Array<any> = []; 
+  public arr_municipios : Array<any> = []; 
 
   clienteForm = new FormGroup({
     nombres: new FormControl(''),
@@ -34,7 +37,8 @@ export class EditClienteComponent implements OnInit {
     private _route: ActivatedRoute,
     private _router: Router,
     private _clienteService: ClienteService,
-    private _adminService: AdminService
+    private _adminService: AdminService,
+    private _ciudadesService : CiudadesService
   ) {
     this.token = this._adminService.getToken();
   }
@@ -76,7 +80,21 @@ export class EditClienteComponent implements OnInit {
           }
         )
       }
-    )
+    );
+
+    this._ciudadesService.listar_ciudades_colombia().subscribe(
+      response => {
+        this.colombia_lugares = response;
+        this.colombia_lugares.forEach(element => {
+          this.arr_municipios.push(element.municipio);
+        })
+
+        // console.log(this.arr_municipios);
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
   onSubmit(form: any) {
