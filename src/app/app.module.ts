@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClient, HttpClientModule } from "@angular/common/http";
 import { NgbPaginationModule } from "@ng-bootstrap/ng-bootstrap";
 import { NgxTinymceModule } from 'ngx-tinymce';
+// import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -47,6 +48,7 @@ import { GaleriaProductoComponent } from './components/productos/galeria-product
   ],
   imports: [
     BrowserModule,
+    // AngularFontAwesomeModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
