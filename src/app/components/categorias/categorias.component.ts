@@ -23,8 +23,6 @@ export class CategoriasComponent implements OnInit {
     this._adminService.obtener_categorias_admin(this.token).subscribe(
       response => {
         this.categorias = response.data;
-        // console.log(this.categorias);
-
       },
       error => {
         console.log(error);
@@ -87,4 +85,7 @@ export class CategoriasComponent implements OnInit {
     }
   }
 
+  eliminar(idx:any){
+    this.categorias.categorias.splice(idx, 1);
+  }
 }
