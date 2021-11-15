@@ -23,6 +23,7 @@ import { InventarioProductoComponent } from './components/productos/inventario-p
 import { CreateCuponComponent } from './components/cupones/create-cupon/create-cupon.component';
 import { IndexCuponComponent } from './components/cupones/index-cupon/index-cupon.component';
 import { CategoriasComponent } from './components/categorias/categorias.component';
+import { GaleriaProductoComponent } from './components/productos/galeria-producto/galeria-producto.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { CategoriasComponent } from './components/categorias/categorias.componen
     CreateCuponComponent,
     IndexCuponComponent,
     CategoriasComponent,
+    GaleriaProductoComponent,
   ],
   imports: [
     BrowserModule,
