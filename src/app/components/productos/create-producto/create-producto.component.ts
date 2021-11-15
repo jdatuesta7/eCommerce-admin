@@ -22,6 +22,7 @@ export class CreateProductoComponent implements OnInit {
   public token : any;
   public load_btn = false;
   public usuario : any = {};
+  public categorias : any = {};
   
   productoForm = new FormGroup({
     titulo : new FormControl('', Validators.required),
@@ -31,6 +32,7 @@ export class CreateProductoComponent implements OnInit {
     descripcion : new FormControl('', Validators.required),
     contenido : new FormControl('', Validators.required)
   });
+  
   constructor(
     private _productoService : ProductoService,
     private _adminService : AdminService,
@@ -41,6 +43,15 @@ export class CreateProductoComponent implements OnInit {
     }
     this.usuario = this._adminService.getUser();
     this.token = this._adminService.getToken();
+    this._adminService.obtener_categorias_publico(this.token).subscribe(
+      response => {
+        console.log(response);
+        this.categorias = response.data;
+      },
+      error => {
+        console.log(error);
+      }
+    )
    }
 
   ngOnInit(): void {
