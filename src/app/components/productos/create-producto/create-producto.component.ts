@@ -43,7 +43,7 @@ export class CreateProductoComponent implements OnInit {
     }
     this.usuario = this._adminService.getUser();
     this.token = this._adminService.getToken();
-    this._adminService.obtener_categorias_publico(this.token).subscribe(
+    this._adminService.obtener_categorias_publico().subscribe(
       response => {
         console.log(response);
         this.categorias = response.data;

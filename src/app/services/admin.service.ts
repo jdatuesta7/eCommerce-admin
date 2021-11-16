@@ -96,8 +96,8 @@ export class AdminService {
     return this._http.put(this.url+'/actualizar_categorias_admin/'+id, data, {headers: headers});
   }
 
-  obtener_categorias_publico(token:any):Observable<any>{
-    let headers = new HttpHeaders({'Content-Type':'application/json', 'Authorization': token});
+  obtener_categorias_publico():Observable<any>{
+    let headers = new HttpHeaders().set('Content-Type','application/json');
     return this._http.get(this.url+'obtener_categorias_publico', {headers: headers});
   }
 }
