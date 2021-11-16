@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AdminService } from 'src/app/services/admin.service';
 import { ProductoService } from 'src/app/services/producto.service';
 
@@ -9,13 +9,14 @@ declare var jQuery:any;
 declare var $:any;
 
 @Component({
-  selector: 'app-create-producto',
-  templateUrl: './create-producto.component.html',
-  styleUrls: ['./create-producto.component.css']
+  selector: 'app-update-producto',
+  templateUrl: './update-producto.component.html',
+  styleUrls: ['./update-producto.component.css']
 })
-export class CreateProductoComponent implements OnInit {
+export class UpdateProductoComponent implements OnInit {
 
   public producto : any = {};
+  public id : any;
   public file : any = undefined;
   public imgSelect : any | ArrayBuffer = 'assets/img/default-placeholder.png';
   public config : any = {};
@@ -23,8 +24,8 @@ export class CreateProductoComponent implements OnInit {
   public load_btn = false;
   public usuario : any = {};
   public categorias : any = {};
-
-  productoForm = new FormGroup({
+  public load_data = true;
+  actualizarproductoForm = new FormGroup({
     titulo : new FormControl('', Validators.required),
     stock : new FormControl('', Validators.required),
     precio : new FormControl('', Validators.required),
@@ -34,6 +35,7 @@ export class CreateProductoComponent implements OnInit {
   });
 
   constructor(
+    private _route : ActivatedRoute,
     private _productoService : ProductoService,
     private _adminService : AdminService,
     private _router : Router
@@ -41,21 +43,44 @@ export class CreateProductoComponent implements OnInit {
     this.config = {
       height: 500
     }
-    this.usuario = this._adminService.getUser();
-    this.token = this._adminService.getToken();
-    this._adminService.obtener_categorias_publico(this.token).subscribe(
-      response => {
-        console.log(response);
-        this.categorias = response.data;
-      },
-      error => {
-        console.log(error);
-      }
-    )
+    this.token = localStorage.getItem('token');
    }
 
-  ngOnInit(): void {
+   ngOnInit(): void {
+    this._route.params.subscribe(
+      params => {
+        this.id = params['id'];
+        // console.log(this.id);
+
+        this._productoService.obtener_producto(this.id, this.token).subscribe(
+          response => {
+            console.log(response)
+            if (response.data == undefined) {
+              this.producto = undefined;
+
+              this.actualizarproductoForm = new FormGroup({
+                titulo : new FormControl(this.producto.titulo),
+                stock : new FormControl(this.producto.stock),
+                precio : new FormControl(this.producto.precio),
+                categoria : new FormControl(this.producto.categoria),
+                descripcion : new FormControl(this.producto.description),
+                contenido : new FormControl(this.producto.contenido)
+              });
+              this.load_data = false;
+
+            }else{
+              this.producto = response.data
+               this.load_data = false;
+              console.log(response.message);
+            }
+          },error => {
+            console.log(error);
+          }
+        );
+      }
+    );
   }
+
 
   onSubmit(form:any){
     if(form.valid){
@@ -63,7 +88,7 @@ export class CreateProductoComponent implements OnInit {
       this.producto.admin = this._adminService.getUser()._id;
 
       this.load_btn = true;
-      this._productoService.registro_producto(this.producto, this.file, this.token).subscribe(
+      this._productoService.actualizar_producto(this.producto, form.value, this.token).subscribe(
         response =>{
           console.log(response);
 
@@ -75,16 +100,6 @@ export class CreateProductoComponent implements OnInit {
           });
 
           this.load_btn = false;
-
-          this.productoForm = new FormGroup({
-            titulo : new FormControl(''),
-            stock : new FormControl(''),
-            precio : new FormControl(''),
-            categoria : new FormControl(''),
-            descripcion : new FormControl(''),
-            contenido : new FormControl('')
-          });
-
           this._router.navigate(['/panel/productos']);
 
         },error =>{

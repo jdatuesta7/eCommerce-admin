@@ -10,7 +10,7 @@ export class ClienteService {
 
   public url;
 
-  constructor(private _http: HttpClient) { 
+  constructor(private _http: HttpClient) {
     this.url = GLOBAL.url;
   }
 
@@ -38,4 +38,7 @@ export class ClienteService {
     let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
     return this._http.delete(this.url+'eliminar_cliente_admin/'+id, {headers: headers});
   }
+
 }
+
+

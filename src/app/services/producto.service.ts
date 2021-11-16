@@ -10,7 +10,7 @@ export class ProductoService {
 
   public url;
 
-  constructor(private _http: HttpClient) { 
+  constructor(private _http: HttpClient) {
     this.url = GLOBAL.url;
   }
 
@@ -69,4 +69,9 @@ export class ProductoService {
     let headers = new HttpHeaders({'Authorization': token});
     return this._http.put(this.url+'eliminar_imagen_galeria_admin/'+id, data, {headers: headers});
   }
+  actualizar_producto(id: any, data: any, token:any):Observable<any>{
+    let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
+    return this._http.put(this.url+'actualizar_producto/'+id, data, {headers: headers});
+  }
 }
+

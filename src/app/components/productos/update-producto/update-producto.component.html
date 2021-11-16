@@ -9,10 +9,11 @@
     </div>
 </div>
 
-<form [formGroup]="productoForm" (ngSubmit)="onSubmit(productoForm)">
+<ng-container *ngIf="producto">
+  <form [formGroup]="actualizarproductoForm" (ngSubmit)="onSubmit(actualizarproductoForm)">
     <div class="card box-shadow-sm">
         <div class="card-header">
-            <h5 style="margin-bottom: 0px;">Registro de producto</h5>
+            <h5 style="margin-bottom: 0px;">Actualizacion de producto</h5>
         </div>
         <div class="card-body">
             <div class="row">
@@ -70,12 +71,17 @@
             </div>
         </div>
         <div class="card-footer">
-            <button *ngIf="!load_btn" class="btn btn-primary mr-3" type="submit">Crear producto</button>
+            <button *ngIf="!load_btn" class="btn btn-primary mr-3" type="submit">Actualizar producto</button>
             <button *ngIf="load_btn" disabled type="button" class="btn btn-primary mr-3">
                 <span class="spinner-grow spinner-grow-sm me-2" role="status" aria-hidden="true"></span>
-                Creando...
+                Actualizando...
             </button>
             <a [routerLink]="['/panel/productos']" class="btn btn-warning">Regresar</a>
         </div>
     </div>
 </form>
+
+</ng-container>
+<ng-container *ngIf="producto == undefined">
+idjidsi
+</ng-container>
