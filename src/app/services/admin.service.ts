@@ -42,13 +42,18 @@ export class AdminService {
 
       // console.log(decodedToken);
 
+      if(helper.isTokenExpired(token)){
+        localStorage.clear();
+        return false;
+      }
+
       if (!decodedToken) {
-        localStorage.removeItem('token');
+        localStorage.clear();
         return false;
       }
 
     } catch (error) {
-      localStorage.removeItem('token');
+      localStorage.clear();
       console.log(error);
       return false;
     }
