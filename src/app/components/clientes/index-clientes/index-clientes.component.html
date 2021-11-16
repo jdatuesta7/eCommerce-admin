@@ -53,7 +53,7 @@
                     </tr>
                 </tbody>
 
-                <tbody *ngIf="!load_data">
+                <tbody *ngIf="!load_data && clientes.length != 0">
                     <tr
                         *ngFor="let item of clientes| slice: (page-1) * pageSize : (page-1) * pageSize + pageSize; let indice = index">
                         <th scope="row">{{ indice + 1}}</th>
@@ -103,6 +103,12 @@
                                 </div>
                             </div>
                         </td>
+                    </tr>
+                </tbody>
+
+                <tbody *ngIf="clientes.length == 0">
+                    <tr>
+                        <td colspan="5"><h4 class="text-center">¡No hay clientes registrados!</h4></td>
                     </tr>
                 </tbody>
 

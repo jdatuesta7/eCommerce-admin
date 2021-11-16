@@ -10,11 +10,18 @@
     </button>
     <ul class="navbar-nav ml-auto d-none d-lg-flex align-items-center">
 
-        <li class="nav-item">
-            <a class="nav-link py-0" href="../components/typography.html">
+        <li class="nav-item d-lg-block d-none dropdown">
+            <a class="nav-tool dropdown-toggle" toggle="dropdown">
                 <i class="cxi-profile align-middle mt-n1 mr-2"></i>
                 {{ usuario.nombres + ' ' + usuario.apellidos}}
             </a>
+
+            <div class="dropdown-menu">
+                <a role="button" (click)="logout()" class="dropdown-item">
+                    <i class="cxi-logout mr-2"></i>
+                    Cerrar Sesion
+                </a>
+            </div>
         </li>
 
     </ul>

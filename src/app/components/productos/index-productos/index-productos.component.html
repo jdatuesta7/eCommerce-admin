@@ -52,7 +52,7 @@
                     </tr>
                 </tbody>
 
-                <tbody *ngIf="!load_data">
+                <tbody *ngIf="!load_data && arr_productos.length != 0">
                     <tr *ngFor="let item of productos | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize; let indice = index">
                         <th scope="row">{{ indice + 1}}</th>
                         <td>
@@ -80,6 +80,12 @@
                                 </div>
                             </div>
                         </td>
+                    </tr>
+                </tbody>
+
+                <tbody *ngIf="arr_productos.length == 0">
+                    <tr>
+                        <td colspan="7"><h4 class="text-center">¡No ha registrado productos!</h4></td>
                     </tr>
                 </tbody>
 

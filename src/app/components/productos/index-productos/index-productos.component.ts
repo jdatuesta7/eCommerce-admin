@@ -23,6 +23,7 @@ export class IndexProductosComponent implements OnInit {
   public url;
   public page = 1;
   public pageSize = 20;
+  public usuario : any = {};
 
   constructor(
     private _productoService : ProductoService,
@@ -30,6 +31,7 @@ export class IndexProductosComponent implements OnInit {
   ) { 
     this.token = this._adminService.getToken();
     this.url = GLOBAL.url;
+    this.usuario = JSON.parse(localStorage.getItem('usuario')!);
    }
 
   ngOnInit(): void {
@@ -60,7 +62,7 @@ export class IndexProductosComponent implements OnInit {
 
         console.log(this.arr_productos);
         this.load_data = false;
-        console.log(this.productos);
+        // console.log(this.productos);
       },error => {
         console.log(error);
       }

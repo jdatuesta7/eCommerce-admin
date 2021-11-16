@@ -27,4 +27,10 @@ export class SidebarComponent implements OnInit {
     }
   }
 
+  logout(){
+    window.location.reload();
+    localStorage.clear();
+    this._router.navigate(['/']);
+  }
+
 }
