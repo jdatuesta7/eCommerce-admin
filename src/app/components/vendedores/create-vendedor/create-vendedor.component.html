@@ -15,61 +15,85 @@
         <div class="card-body">
 
             <div class="row">
-                <div class="col-md-4 form-group">
-                    <label for="nombres" class="form-label">Nombres</label>
-                    <input id="nombres" type="text" formControlName="nombres" class="form-control" placeholder="Nombres"
-                        required>
+                <div class="col-lg-8">
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <label for="nombres" class="form-label">Nombres</label>
+                            <input id="nombres" type="text" formControlName="nombres" class="form-control"
+                                placeholder="Nombres" required>
+                        </div>
+
+                        <div class="col-md-6 form-group">
+                            <label for="apellidos" class="form-label">Apellidos</label>
+                            <input id="apellidos" type="text" formControlName="apellidos" class="form-control"
+                                placeholder="Apellidos" required>
+                        </div>
+
+                        <div class="col-md-6 form-group">
+                            <label for="email" class="form-label">Correo electrónico</label>
+                            <input id="email" type="email" formControlName="email" class="form-control"
+                                placeholder="Correo electrónico" required>
+                        </div>
+
+                        <div class="col-md-6 form-group">
+                            <label for="nombre_local" class="form-label">Nombre del Local</label>
+                            <input id="nombre_local" style="text-transform:uppercase;" type="text"
+                                formControlName="nombre_local" class="form-control" placeholder="Nombre del Local"
+                                required>
+                        </div>
+
+                        <div class="col-md-4 form-group">
+                            <label for="id_local" class="form-label">Numero del Local</label>
+                            <input id="id_local" type="text" formControlName="id_local" class="form-control"
+                                placeholder="Numero del Local" required>
+                        </div>
+
+                        <div class="col-md-4 form-group">
+                            <label for="DNI" class="form-label">DNI</label>
+                            <input id="DNI" type="number" formControlName="dni" class="form-control" placeholder="DNI"
+                                required>
+                        </div>
+
+                        <div class="col-md-4 form-group">
+                            <label for="telefono" class="form-label">Telefono</label>
+                            <input id="telefono" type="tel" formControlName="telefono" class="form-control"
+                                placeholder="Telefono" required>
+                        </div>
+
+                        <div class="col-md-4 form-group">
+                            <label for="password" class="form-label">Contraseña</label>
+                            <input id="password" formControlName="password" class="form-control"
+                                placeholder="contraseña" required>
+                        </div>
+
+                        <div class="col-md-8 form-group">
+                            <label for="description" class="form-label">Descripcion del Negocio</label>
+                            <textarea id="description" formControlName="descripcion" class="form-control" cols="30"
+                                rows="1" placeholder="Descripcion..." required></textarea>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="col-md-4 form-group">
-                    <label for="apellidos" class="form-label">Apellidos</label>
-                    <input id="apellidos" type="text" formControlName="apellidos" class="form-control"
-                        placeholder="Apellidos" required>
-                </div>
-
-                <div class="col-md-4 form-group">
-                    <label for="email" class="form-label">Correo electrónico</label>
-                    <input id="email" type="email" formControlName="email" class="form-control"
-                        placeholder="Correo electrónico" required>
-                </div>
-
-                <div class="col-md-4 form-group">
-                    <label for="DNI" class="form-label">DNI</label>
-                    <input id="DNI" type="number" formControlName="dni" class="form-control" placeholder="DNI" required>
-                </div>
-
-                <div class="col-md-4 form-group">
-                    <label for="id_local" class="form-label">Numero del Local</label>
-                    <input id="id_local" type="text" formControlName="id_local" class="form-control"
-                        placeholder="Numero del Local" required>
-                </div>
-
-                <div class="col-md-4 form-group">
-                    <label for="nombre_local" class="form-label">Nombre del Local</label>
-                    <input id="nombre_local" style="text-transform:uppercase;" type="text" formControlName="nombre_local" class="form-control"
-                        placeholder="Nombre del Local" required>
-                </div>
-
-                <div class="col-md-4 form-group">
-                    <label for="telefono" class="form-label">Telefono</label>
-                    <input id="telefono" type="tel" formControlName="telefono" class="form-control"
-                        placeholder="Telefono" required>
-                </div>
-
-                <div class="col-md-4 form-group">
-                    <label for="password" class="form-label">Contraseña</label>
-                    <input id="password" formControlName="password" class="form-control"
-                        placeholder="contraseña" required>
-                </div>
-
-                <div class="col-md-8 form-group">
-                    <label for="description" class="form-label">Descripcion del Negocio</label>
-                    <textarea id="description" formControlName="descripcion" class="form-control" cols="30" rows="1" placeholder="Descripcion..." required></textarea>
+                <div class="col-lg-4">
+                    <div class="row">
+                        <div class="col-lg-12 form-group">
+                            <label for="">Logo del Local</label>
+                            <div class="custom-file">
+                                <input class="custom-file-input" type="file" id="file-input" (change)="fileChangeEvent($event)">
+                                <label class="custom-file-label" id="input-portada" style="white-space:nowrap; overflow:hidden" for="file-input">Seleccionar imagen</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <img [src]="imgSelect" class="img-thumbnail"
+                                alt="Rounded image">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="card-footer mt-3">
-            <button *ngIf="!load_btn" type="submit" [disabled]="!vendedorForm.valid" class="btn btn-primary mr-3">Crear vendedor</button>
+            <button *ngIf="!load_btn" type="submit" [disabled]="!vendedorForm.valid" class="btn btn-primary mr-3">Crear
+                vendedor</button>
             <button *ngIf="load_btn" disabled type="button" class="btn btn-primary mr-3">
                 <span class="spinner-grow spinner-grow-sm me-2" role="status" aria-hidden="true"></span>
                 Creando...

@@ -61,7 +61,6 @@ export class CreateProductoComponent implements OnInit {
     if(form.valid){
       this.producto = form.value;
       this.producto.admin = this._adminService.getUser()._id;
-
       this.load_btn = true;
       this._productoService.registro_producto(this.producto, this.file, this.token).subscribe(
         response =>{

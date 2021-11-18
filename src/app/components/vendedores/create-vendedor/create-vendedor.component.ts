@@ -5,6 +5,7 @@ import { AdminService } from 'src/app/services/admin.service';
 import { ClienteService } from 'src/app/services/cliente.service';
 
 declare var iziToast:any;
+declare var $:any;
 
 @Component({
   selector: 'app-create-vendedor',
@@ -16,6 +17,8 @@ export class CreateVendedorComponent implements OnInit {
   public vendedor : any = { };
   public token : any;
   public load_btn = false;
+  public file : any = undefined;
+  public imgSelect : any | ArrayBuffer = 'assets/img/default-placeholder.png';
 
   vendedorForm = new FormGroup({
     nombres : new FormControl('', Validators.required),
@@ -44,10 +47,11 @@ export class CreateVendedorComponent implements OnInit {
     if(form.valid){
       this.vendedor = form.value;
       this.vendedor.rol = 'vendedor';
+      this.vendedor.id_local = this.vendedor.id_local.toUpperCase();
       this.vendedor.nombre_local = this.vendedor.nombre_local.toUpperCase();
       this.load_btn = true;
 
-      this._adminService.registro_vendedores_admin(this.vendedor, this.token).subscribe(
+      this._adminService.registro_vendedor_admin(this.vendedor, this.file, this.token).subscribe(
         response => {
           console.log(response);
           if(response.data){
@@ -107,6 +111,56 @@ export class CreateVendedorComponent implements OnInit {
     }
 
     
+  }
+
+  fileChangeEvent(event:any):void{
+    let file;
+
+    if(event.target.files && event.target.files[0]){
+      file = <File>event.target.files[0];
+      // console.log(file);
+
+      if(file.size <= 4000000){
+
+        if(file.type == 'image/png' || file.type == 'image/webp' || file.type == 'image/jpg' || file.type == 'image/gif' || file.type == 'image/jpeg') {
+          const reader = new FileReader();
+          reader.onload = e => this.imgSelect = reader.result;
+          reader.readAsDataURL(file);
+
+          $('#input-portada').text(file.name);
+          this.file = file;
+          console.log(this.file);
+        }else{
+          iziToast.show({
+            title: 'ERROR',
+            color: 'red',
+            position: 'topRight',
+            message: 'El archivo debe ser una imagen'
+          });
+          $('#input-portada').text('Seleccionar imagen');
+          this.imgSelect = 'assets/img/default-placeholder.png';
+        }
+      }else{
+        iziToast.show({
+          title: 'ERROR',
+          color: 'red',
+          position: 'topRight',
+          message: 'La imagen no puede superar los 4MB'
+        });
+        $('#input-portada').text('Seleccionar imagen');
+        this.imgSelect = 'assets/img/default-placeholder.png';
+      }
+    }else{
+      iziToast.show({
+        title: 'ERROR',
+        color: 'red',
+        position: 'topRight',
+        message: 'Debe subir una imagen'
+      });
+      $('#input-portada').text('Seleccionar imagen');
+      this.imgSelect = 'assets/img/default-placeholder.png';
+    }
+
   }
 
 }
