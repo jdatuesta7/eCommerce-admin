@@ -33,6 +33,7 @@
                 <thead class="thead-dark">
                     <tr>
                         <th>#</th>
+                        <th>Imagen</th>
                         <th>Titulo</th>
                         <th>Stock</th>
                         <th>Precio</th>
@@ -59,6 +60,10 @@
                             <h6 style="padding-bottom: 0; margin-bottom: 0;">
                                 <img style="width: 60px;" [src]="url+'obtener_portada/'+item.portada"
                                     class="img-thumbnail rounded-0 mr-1" alt="Square image">
+                            </h6>
+                        </td>
+                        <td>
+                            <h6 style="padding-bottom: 0; margin-bottom: 0;">
                                 {{ item.titulo }}
                             </h6>
                         </td>
