@@ -83,5 +83,9 @@
 
 </ng-container>
 <ng-container *ngIf="producto == undefined">
-idjidsi
+    <div class="card">
+        <div class="card-body" *ngIf="producto == undefined">
+            <h3 class="text-center">No se encontró el producto <img src="assets/img/error/advertencia.png" width="70px" alt="error"> </h3>
+        </div>
+    </div>
 </ng-container>

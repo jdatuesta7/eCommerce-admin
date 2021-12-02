@@ -59,44 +59,53 @@ export class CreateProductoComponent implements OnInit {
 
   onSubmit(form:any){
     if(form.valid){
-      this.producto = form.value;
-      this.producto.admin = this._adminService.getUser()._id;
-      this.load_btn = true;
-      this._productoService.registro_producto(this.producto, this.file, this.token).subscribe(
-        response =>{
-          console.log(response);
+      if (this.file == undefined) {
+        iziToast.show({
+          title: 'ERROR',
+          color: 'red',
+          position: 'topRight',
+          message: 'Debe subir una imagen del producto'
+        });
+      }else{
+        this.producto = form.value;
+        this.producto.admin = this._adminService.getUser()._id;
+        this.load_btn = true;
+        this._productoService.registro_producto(this.producto, this.file, this.token).subscribe(
+          response =>{
+            console.log(response);
 
-          iziToast.show({
-            title: 'OK',
-            color: 'green',
-            position: 'topRight',
-            message: 'se ha registrado correctamente el producto'
-          });
+            iziToast.show({
+              title: 'OK',
+              color: 'green',
+              position: 'topRight',
+              message: 'se ha registrado correctamente el producto'
+            });
 
-          this.load_btn = false;
+            this.load_btn = false;
 
-          this.productoForm = new FormGroup({
-            titulo : new FormControl(''),
-            stock : new FormControl(''),
-            precio : new FormControl(''),
-            categoria : new FormControl(''),
-            descripcion : new FormControl(''),
-            contenido : new FormControl('')
-          });
+            this.productoForm = new FormGroup({
+              titulo : new FormControl(''),
+              stock : new FormControl(''),
+              precio : new FormControl(''),
+              categoria : new FormControl(''),
+              descripcion : new FormControl(''),
+              contenido : new FormControl('')
+            });
 
-          this._router.navigate(['/panel/productos']);
+            this._router.navigate(['/panel/productos']);
 
-        },error =>{
-          console.log(error);
-          iziToast.show({
-            title: 'ERROR',
-            color: 'red',
-            position: 'topRight',
-            message: error.error.message
-          });
-          this.load_btn = false;
-        }
+          },error =>{
+            console.log(error);
+            iziToast.show({
+              title: 'ERROR',
+              color: 'red',
+              position: 'topRight',
+              message: error.error.message
+            });
+            this.load_btn = false;
+          }
       );
+      }
     }else{
       iziToast.show({
         title: 'ERROR',
@@ -124,7 +133,7 @@ export class CreateProductoComponent implements OnInit {
 
           $('#input-portada').text(file.name);
           this.file = file;
-          // console.log(this.file);
+          console.log(this.file);
         }else{
           iziToast.show({
             title: 'ERROR',

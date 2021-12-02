@@ -66,11 +66,6 @@ export class AdminService {
     return this._http.get(this.url+'listar_vendedores_filtro_admin/'+tipo+'/'+filtro, {headers: headers});
   }
 
-  // registro_vendedores_admin(data:any, token:any):Observable<any>{
-  //   let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
-  //   return this._http.post(this.url+'/registro_vendedor_admin', data, {headers: headers});
-  // }
-
   registro_vendedor_admin(data:any , file:any, token:any):Observable<any>{
     let headers = new HttpHeaders({'Authorization': token});
 
