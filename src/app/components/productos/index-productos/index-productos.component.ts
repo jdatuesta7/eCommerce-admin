@@ -5,6 +5,7 @@ import { ProductoService } from 'src/app/services/producto.service';
 
 declare var iziToast:any;
 declare var require: any;
+declare var $:any;
 const ExcelJS = require('exceljs');
 var fs = require('file-saver');
 
@@ -24,6 +25,7 @@ export class IndexProductosComponent implements OnInit {
   public page = 1;
   public pageSize = 20;
   public usuario : any = {};
+  public load_btn = false;
 
   constructor(
     private _productoService : ProductoService,
@@ -127,5 +129,42 @@ export class IndexProductosComponent implements OnInit {
       let blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
       fs.saveAs(blob, fname+'-'+new Date().valueOf()+'.xlsx');
     });
+  }
+
+  eliminar(id: any){
+
+    this.load_btn = true;
+    this._productoService.eliminar_producto_admin(id, this.token).subscribe(
+      response => {
+        iziToast.show({
+          title: 'OK',
+          color: 'green',
+          position: 'topRight',
+          message: 'se ha eliminado correctamente el producto'
+        });
+
+        $('#delete-'+id).modal('hide');
+        $('.modal-backdrop').removeClass('show');
+
+        if(this._adminService.getUser().rol == 'vendedor'){
+          this.obtenerProductos('', this.token, this._adminService.getUser()._id);
+        }
+    
+        if(this._adminService.getUser().rol == 'admin'){
+          this.obtenerProductos('', this.token, null);
+        }
+
+        this.load_btn = false;
+      },error => {
+        iziToast.show({
+          title: 'OK',
+          color: 'green',
+          position: 'topRight',
+          message: error.error.message
+        });
+        this.load_btn = false;
+      }
+    );
+
   }
 }
